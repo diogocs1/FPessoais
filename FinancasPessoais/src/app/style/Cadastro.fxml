@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.CadastroController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Line endX="600.0" endY="0.0" fill="BLACK" layoutX="144.0" startX="-100.0" startY="0.0" stroke="#bfbfbf" strokeWidth="2.4" AnchorPane.topAnchor="65.0">
+      <rotationAxis>
+        <Point3D />
+      </rotationAxis>
+    </Line>
+    <Text fill="WHITE" layoutX="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Novo Usuario" AnchorPane.topAnchor="28.0">
+      <effect>
+        <Lighting diffuseConstant="2.0" surfaceScale="1.893700787401575">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <contentInput>
+            <Reflection topOpacity="0.43700787401574803" />
+          </contentInput>
+          <light>
+            <javafx.scene.effect.Light.Point color="#00e0ff" x="100.0" y="100.0" z="50.0" />
+          </light>
+        </Lighting>
+      </effect>
+      <font>
+        <Font name="System Bold Italic" size="30.0" />
+      </font>
+    </Text>
+    <TabPane prefHeight="288.0" prefWidth="502.20001220703125" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="89.0">
+      <tabs>
+        <Tab text="Usuario">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                <GridPane layoutX="190.0" AnchorPane.topAnchor="190.0">
+                  <children>
+                    <TextField fx:id="txtUsuario" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <PasswordField fx:id="pfSenha" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <PasswordField fx:id="pfConfirmaSenha" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Usuário" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                      <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                      </font>
+                    </Label>
+                    <Label text="Senha" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label text="Confirmar" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="Nascimento" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="txtNascimento" prefWidth="124.0" promptText="dd/mm/aaa" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.rowSpan="1">
+                      <GridPane.margin>
+                        <Insets right="80.0" />
+                      </GridPane.margin>
+                    </TextField>
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <HBox id="HBox" alignment="CENTER" layoutX="300.0" layoutY="330.0" spacing="5.0">
+                  <children>
+                    <Button fx:id="btSalvar" mnemonicParsing="false" text="Salvar" />
+                    <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" />
+                  </children>
+                </HBox>
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
+</AnchorPane>
