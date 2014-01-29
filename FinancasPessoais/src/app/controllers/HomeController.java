@@ -13,6 +13,7 @@ public class HomeController {
 	@FXML
 	public void initialize () {
 		//Por fazer...
+		lista1.setContextMenu(null);
 	}
 
 }
