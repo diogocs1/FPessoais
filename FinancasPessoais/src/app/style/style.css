@@ -64,3 +64,13 @@
 	-fx-font-weight:bold;
 	-fx-text-fill:red ;
 }
+
+.list-view {
+	-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);
+	-fx-background-radius:20;
+	-fx-border-radius: 20;
+	-fx-border-color:rgb(0,0,0)}
+
+.list-cell {
+	-fx-opacity:0.0;
+}
