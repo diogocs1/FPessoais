@@ -14,7 +14,7 @@ public class Conn {
 			//Retrona a conexão para uso posterior em outros métodos
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Conectando banco de dados...");
-			return DriverManager.getConnection("jdbc:mysql://localhost:3306/FinancasPessoais", "root", "mysql");
+			return DriverManager.getConnection("jdbc:mysql://localhost:3306/FinancasPessoais", "fp", "fp");
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e.getMessage());
 		}
