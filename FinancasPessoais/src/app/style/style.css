@@ -81,3 +81,10 @@
 .table-view .corner {
 	-fx-background-color:black ;
 }
+.choice-box {
+	-fx-background-color: linear-gradient(to bottom, derive(grey,-02%), derive(black,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);
+	-fx-background-radius:20;
+}
+.text-input {
+	-fx-text-fill:white ;
+}

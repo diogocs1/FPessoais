@@ -7,6 +7,7 @@ public class Despesa {
 	private String titulo;
 	private String descricao;
 	private String vencimento;
+	private String status;
 	private int prioridade;
 	private double valor;
 	private CreditCard cartao;
@@ -78,5 +79,13 @@ public class Despesa {
 
 	public void setCartao(CreditCard cartao) {
 		this.cartao = cartao;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }
