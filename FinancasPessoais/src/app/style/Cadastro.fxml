@@ -13,11 +13,6 @@
 <AnchorPane prefHeight="700.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.CadastroController">
   <!-- TODO Add Nodes -->
   <children>
-    <Line endX="600.0" endY="0.0" fill="BLACK" layoutX="144.0" startX="-100.0" startY="0.0" stroke="#bfbfbf" strokeWidth="2.4" AnchorPane.topAnchor="65.0">
-      <rotationAxis>
-        <Point3D />
-      </rotationAxis>
-    </Line>
     <Text fill="WHITE" layoutX="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Novo Usuario" AnchorPane.topAnchor="28.0">
       <effect>
         <Lighting diffuseConstant="2.0" surfaceScale="1.893700787401575">
@@ -38,9 +33,9 @@
     </Text>
     <TabPane prefHeight="288.0" prefWidth="502.20001220703125" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="89.0">
       <tabs>
-        <Tab text="Usuario">
+        <Tab style="-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);" text="Usuario">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);&#10;-fx-background-radius:20;&#10;-fx-border-radius: 20;&#10;-fx-border-color:rgb(0,0,0)">
               <children>
                 <GridPane layoutX="190.0" AnchorPane.topAnchor="190.0">
                   <children>
