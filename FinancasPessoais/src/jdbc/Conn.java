@@ -2,7 +2,6 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Conn {
@@ -19,12 +18,5 @@ public class Conn {
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e.getMessage());
 		}
-	}
-	public static void main (String args[]) throws SQLException{
-		Connection conexao = Conn.getConexao();
-		PreparedStatement stmt = conexao.prepareStatement("INSERT INTO usuario (nome, senha) VALUES ('diogo', '1234');");
-		stmt.execute();
-		stmt.close();
-		conexao.close();
 	}
 }

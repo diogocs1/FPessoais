@@ -71,6 +71,7 @@ public class LoginController{
 						Main.inicio();
 					}
 				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Problema no Banco de dados: \n" + e.getMessage());
 					System.out.println(e.getMessage());
 				}
 			}

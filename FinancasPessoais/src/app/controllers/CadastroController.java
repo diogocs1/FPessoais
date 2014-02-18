@@ -75,8 +75,9 @@ public class CadastroController{
 								new Dados().criarUsuario(user);
 								JOptionPane.showMessageDialog(null, "Usuário Cadastrado!");
 							}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e){
-								JOptionPane.showMessageDialog(null, "Erro de Integridae: Usuário já está cadastrado!");
+								JOptionPane.showMessageDialog(null, "Usuário já está cadastrado!");
 							} catch (SQLException e){
+								JOptionPane.showMessageDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
 								System.out.println(e.getMessage());
 							}
 							// Após o fim do cadastro, retorna para a tela de Login
