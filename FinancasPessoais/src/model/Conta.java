@@ -1,13 +1,15 @@
 package model;
 
 public class Conta {
+	private Usuario pessoa;
 	private String agencia;
 	private String tipo;
 	private String conta;
 	private String banco;
 	private double saldo;
 	
-	Conta(String banco, String agencia, String conta, String tipo) {
+	public Conta(Usuario pessoa ,String banco, String agencia, String conta, String tipo) {
+		setPessoa(pessoa);
 		this.setBanco(banco);
 		this.setAgencia(agencia);
 		this.setConta(conta);
@@ -52,5 +54,13 @@ public class Conta {
 
 	public void depositar(double saldo) {
 		this.saldo += saldo;
+	}
+
+	public Usuario getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Usuario pessoa) {
+		this.pessoa = pessoa;
 	}
 }

@@ -2,12 +2,16 @@ package model;
 
 import javax.swing.JOptionPane;
 
-public class Provento {
+public class Ganho {
+	private Conta conta;
+	private Usuario pessoa;
 	private String titulo;
 	private double valor;
 	private String tipo;
 
-	Provento (String titulo,double valor, String tipo){
+	Ganho (Conta conta ,String titulo,double valor, String tipo){
+		setPessoa(conta.getPessoa());
+		setConta(conta);
 		this.setTitulo(titulo);
 		this.setValor(valor);
 		this.setTipo(tipo);
@@ -36,5 +40,21 @@ public class Provento {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
+	public Usuario getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Usuario pessoa) {
+		this.pessoa = pessoa;
 	}
 }

@@ -2,8 +2,10 @@ package model;
 
 import javax.swing.JOptionPane;
 
-public class Despesa {
+public class Gasto {
 	private int id;
+	private Conta conta;
+	private Usuario pessoa;
 	private String titulo;
 	private String descricao;
 	private String vencimento;
@@ -12,7 +14,9 @@ public class Despesa {
 	private double valor;
 	private CreditCard cartao;
 
-	Despesa (String titulo, String descricao, String vencimento, int prioridade, double valor){
+	public Gasto (Conta conta, String titulo, String descricao, String vencimento, int prioridade, double valor){
+		setPessoa(conta.getPessoa());
+		setConta(conta);
 		this.setTitulo(titulo);
 		this.setDescricao(descricao);
 		this.setVencimento(vencimento);
@@ -87,5 +91,21 @@ public class Despesa {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
+	public Usuario getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Usuario pessoa) {
+		this.pessoa = pessoa;
 	}
 }
