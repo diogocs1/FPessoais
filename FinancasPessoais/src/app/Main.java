@@ -25,7 +25,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		/*
-		 * Instacnia a cena a adiciona o cotainer que contém um BorderPane e a Barra de menus
+		 * Instancia a cena a adiciona o cotainer que contém um BorderPane e a Barra de menus
 		 */
 		try {
 			root = (BorderPane)FXMLLoader.load(Main.class.getResource("style/Border.fxml"));
