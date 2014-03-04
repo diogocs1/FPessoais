@@ -92,3 +92,7 @@
 	-fx-background-color: linear-gradient(to bottom, derive(grey,-02%), derive(black,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);
 	-fx-background-radius:20;
 }
+.tool-bar {
+	-fx-background-radius: 0 20 20 0;
+	-fx-background-color:rgb(255,0,0)
+}

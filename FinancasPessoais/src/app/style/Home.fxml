@@ -30,56 +30,136 @@
         </Lighting>
       </effect>
       <font>
-        <Font name="System Bold Italic" size="40.0" />
+        <Font name="System Bold Italic" size="40.0" fx:id="x1" />
       </font>
     </Text>
-    <TabPane disable="false" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" side="BOTTOM" style="" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="90.0">
+    <TabPane disable="false" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" side="TOP" style="" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="90.0">
       <tabs>
         <Tab text="Inicio">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="740.0">
               <children>
-                <Line endX="250.0" layoutX="381.0" layoutY="278.0" startX="-350.0" />
+                <Line endX="250.0" layoutX="381.0" layoutY="278.0" startX="-250.0" />
                 <Line endX="100.0" endY="440.0" layoutX="276.5" layoutY="61.0" startX="100.0" startY="-50.0" />
-                <Text fontSmoothingType="GRAY" layoutX="153.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="Importante">
-                  <fill>
-                    <Color blue="0.000" green="0.000" red="0.800" fx:id="x1" />
-                  </fill>
-                </Text>
-                <Text fill="$x1" fontSmoothingType="GRAY" layoutX="388.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="Não Importante" />
-                <VBox id="VBox" alignment="CENTER" layoutX="65.0" layoutY="52.0" minHeight="209.0" prefHeight="209.0" spacing="-5.0">
-                  <children>
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="U" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="r" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="g" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="e" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="n" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="t" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="e" />
-                  </children>
-                </VBox>
-                <VBox id="VBox" alignment="CENTER" layoutX="34.0" layoutY="344.0" spacing="-5.0">
-                  <children>
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="N" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="ã" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="o" />
-                  </children>
-                </VBox>
-                <VBox id="VBox" alignment="CENTER" layoutX="75.0" layoutY="284.0" minHeight="209.0" prefHeight="209.0" spacing="-5.0">
-                  <children>
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="U" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="r" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="g" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="e" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="n" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="t" />
-                    <Text fill="$x1" fontSmoothingType="GRAY" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="matriz-label" text="e" />
-                  </children>
-                </VBox>
                 <ListView layoutX="132.0" layoutY="60.0" prefHeight="201.0" prefWidth="220.0" />
                 <ListView layoutX="402.0" layoutY="60.0" prefHeight="201.0" prefWidth="220.0" />
                 <ListView layoutX="132.0" layoutY="293.0" prefHeight="201.0" prefWidth="220.0" />
                 <ListView layoutX="402.0" layoutY="293.0" prefHeight="201.0" prefWidth="220.0" />
+                <Text fill="RED" font="$x1" fontSmoothingType="LCD" layoutX="99.0" layoutY="44.13" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="Importante">
+                  <effect>
+                    <Lighting specularConstant="0.8039370078740158">
+                      <bumpInput>
+                        <Shadow />
+                      </bumpInput>
+                      <light>
+                        <javafx.scene.effect.Light.Distant />
+                      </light>
+                    </Lighting>
+                  </effect>
+                </Text>
+                <Text fill="#ccc400" font="$x1" fontSmoothingType="LCD" layoutX="349.0" layoutY="44.0" scaleX="0.7965787440679837" scaleY="1.0" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="Não importante" wrappingWidth="0.0">
+                  <effect>
+                    <Lighting specularConstant="0.8039370078740158">
+                      <bumpInput>
+                        <Shadow />
+                      </bumpInput>
+                      <light>
+                        <javafx.scene.effect.Light.Distant />
+                      </light>
+                    </Lighting>
+                  </effect>
+                </Text>
+                <VBox id="VBox" alignment="CENTER" layoutX="48.0" layoutY="67.0" spacing="-10.0">
+                  <children>
+                    <Text fill="RED" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="U">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                      <font>
+                        <Font name="System Bold Italic" size="30.0" fx:id="x2" />
+                      </font>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="r">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="g">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="e">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="n">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="t">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                    <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="e">
+                      <effect>
+                        <Lighting specularConstant="0.8039370078740158">
+                          <bumpInput>
+                            <Shadow />
+                          </bumpInput>
+                          <light>
+                            <javafx.scene.effect.Light.Distant />
+                          </light>
+                        </Lighting>
+                      </effect>
+                    </Text>
+                  </children>
+                </VBox>
               </children>
             </AnchorPane>
           </content>
@@ -96,12 +176,6 @@
                   </columns>
                 </TableView>
                 <Label layoutX="388.0" layoutY="97.0" text="Descrição:" />
-                <HBox id="HBox" alignment="CENTER" layoutX="405.0" layoutY="443.0" prefWidth="246.0" spacing="40.0">
-                  <children>
-                    <Button mnemonicParsing="false" text="Nova Despeza" />
-                    <Button mnemonicParsing="false" text="Remover" />
-                  </children>
-                </HBox>
                 <Label layoutX="388.0" layoutY="57.0" text="Situação" />
                 <TextArea editable="false" layoutX="485.0" layoutY="97.0" prefHeight="187.0" prefWidth="212.0" style="-fx-background-color: linear-gradient(to bottom, derive(grey,50%), derive(black,65%) 12%, derive(black,23%) 88%, derive(black,50%) 99%, -fx-box-border);;&#10;-fx-background-radius: 20;&#10;-fx-padding: 16;&#10;-fx-ttext-fill: white" wrapText="true" />
                 <ChoiceBox layoutX="485.0" layoutY="55.0" prefWidth="212.0">
@@ -113,8 +187,20 @@
                     </FXCollections>
                   </items>
                 </ChoiceBox>
+                <ToolBar layoutX="340.0" layoutY="346.0" orientation="VERTICAL">
+                  <items>
+                    <Button mnemonicParsing="false" text="Cartões de Crédito" />
+                    <Button mnemonicParsing="false" text="Nova Despeza" />
+                    <Button mnemonicParsing="false" style="-fx-background-color: rgb(255,0,0)" text="Remover" />
+                  </items>
+                </ToolBar>
               </children>
             </AnchorPane>
+          </content>
+        </Tab>
+        <Tab text="Ganhos">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
         </Tab>
       </tabs>
