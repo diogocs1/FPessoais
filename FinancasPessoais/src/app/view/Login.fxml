@@ -13,7 +13,7 @@
 <AnchorPane blendMode="DARKEN" prefHeight="700.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.LoginController">
   <!-- TODO Add Nodes -->
   <children>
-    <Text fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0x0000ffff 30.0%, 0x000000ff 100.0%)" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="Finanças Pessoais" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+    <Text fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0x0000ffff 30.0%, 0x000000ff 100.0%)" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="Finanças Pessoais" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="14.0">
       <effect>
         <Lighting specularConstant="0.8039370078740158">
           <bumpInput>
@@ -28,7 +28,7 @@
         </Lighting>
       </effect>
       <font>
-        <Font name="System Bold Italic" size="40.0" />
+        <Font name="Arial Black" size="40.0" />
       </font>
     </Text>
     <VBox id="VBox" alignment="CENTER" layoutX="335.0" layoutY="322.0" spacing="5.0">
@@ -89,7 +89,7 @@
       <children>
         <Label prefWidth="102.0" styleClass="label-bright" text="Entrar" TilePane.alignment="CENTER">
           <TilePane.margin>
-            <Insets left="47.0" top="21.0" />
+            <Insets left="47.0" top="17.0" />
           </TilePane.margin>
         </Label>
       </children>

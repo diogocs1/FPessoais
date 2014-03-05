@@ -21,6 +21,8 @@ public class CadastroController{
 	 * É necessário idenficar os atributos no FXML (feito através do SceneBuilder)
 	 * e identificar essa classe como Controller do FXML em uso. 
 	 */
+	private Main main;
+	
 	@FXML
 	private TextField txtUsuario;
 	@FXML
@@ -47,7 +49,7 @@ public class CadastroController{
 			@Override
 			public void handle (ActionEvent evt){
 				// Chama o método estático que coloca o login na tela
-				Main.login();
+				main.login();
 			}
 		});
 		// Botão salvar
@@ -81,7 +83,7 @@ public class CadastroController{
 								System.out.println(e.getMessage());
 							}
 							// Após o fim do cadastro, retorna para a tela de Login
-							Main.login();
+							main.login();
 						}
 					}
 				}
@@ -120,4 +122,12 @@ public class CadastroController{
 		else JOptionPane.showMessageDialog(null, "Data inválida");
 		return verifi;
 	}
+
+	public Main getMain() {
+		return main;
+	}
+	public void setMain(Main main) {
+		this.main = main;
+	}
+	
 }

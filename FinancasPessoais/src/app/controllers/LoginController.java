@@ -10,18 +10,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import jdbc.Dados;
 
 public class LoginController{
-	/*
+	/**
 	 * Possui como atributos elementos declarados no FXML (@FXML), apenas os elementos
 	 * controláveis.
 	 * É necessário idenficar os atributos no FXML (feito através do SceneBuilder)
 	 * e identificar essa classe como Controller do FXML em uso. 
 	 */
+	private Main main;
 
 	@FXML
 	private TextField txUsuario;
@@ -54,7 +56,7 @@ public class LoginController{
 			@Override
 			public void handle (ActionEvent evt){
 				//Mostra a tela de cadastro
-				Main.cadastro();
+				main.cadastro();
 			}
 		});
 		// Botão Entrar:
@@ -67,11 +69,10 @@ public class LoginController{
 					Usuario user = new Dados().getUsuario(txUsuario.getText());
 					// Verifica se o usuário digitou a senha correta, à partir do método que compara o valor dos campos com o valor do atributo do objeto pesquisado
 					if (verificaUsuario (user, txUsuario.getText(), txSenha.getText())){
-						System.out.println("Você entrou!");
-						Main.inicio();
+//						Main.inicio();
 					}
 				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, "Problema no Banco de dados: \n" + e.getMessage());
+					Dialogs.showErrorDialog(null, "Problema no Banco de dados: \n" + e.getMessage());
 					System.out.println(e.getMessage());
 				}
 			}
@@ -95,17 +96,20 @@ public class LoginController{
 						if (rdfVerifiUsuario (user, rdfUsuario.getText(), rdfNascimento.getText() ) ){
 							// Grava a nova senha no Banco de Dados
 							new Dados().redefinirSenha(user.getNome(), rdfSenha.getText());
-							JOptionPane.showMessageDialog(null, "Senha redefinida!");
+							Dialogs.showInformationDialog(null, "Senha redefinida!");
 							redefinir.setVisible(false);
 						}
 					} catch (SQLException e) {
-						e.printStackTrace();
+						Dialogs.showErrorDialog(null, "Erro no Banco de dados \n \n" + e.getMessage());
 					}
 				}
 			});
 	}
+	
+	
+	
 	public boolean verificaUsuario (Usuario user, String nome, String senha) {
-		/*
+		/**
 		 * Recebe como parâmetros um Objeto do tipo usuário, recuperado do banco de dados
 		 * o nome e a senha digitados nos campos de login.
 		 * Verifica se o nome do usuário combina com a senha digitada e a senha salva no banco de dados
@@ -116,15 +120,15 @@ public class LoginController{
 			if (user.getSenha().equals(senha)) {
 				vf = true;
 			}else{
-				JOptionPane.showMessageDialog(null, "Senha Inválida!");
+				Dialogs.showWarningDialog(null, "Senha Inválida!");
 			}
 		}else{
-			JOptionPane.showMessageDialog(null, "O Usuário não está cadastrado!");
+			Dialogs.showWarningDialog(null, "Usu�rio n�o est� cadastrado");
 		}
 		return vf;
 	}
 	public boolean rdfVerifiUsuario (Usuario user, String nome, String nasc) {
-		/*
+		/**
 		 * Verifica o nome e a data de nascimento recebidos com parâmetros
 		 * e compara com o valor resgatado do banco de dados no objeto "user"
 		 */
@@ -133,11 +137,18 @@ public class LoginController{
 			if (user.getNascimento().equals(nasc)) {
 				vf = true;
 			}else{
-				JOptionPane.showMessageDialog(null, "Data de nascimento inválida");
+				Dialogs.showWarningDialog(null, "Data de nascimento inválida");
 			}
 		}else{
-			JOptionPane.showMessageDialog(null, "O Usuário não está cadastrado!");
+			Dialogs.showWarningDialog(null, "O Usuário não está cadastrado!");
 		}
 		return vf;
 	}
+	public Main getMain() {
+		return main;
+	}
+	public void setMain(Main main) {
+		this.main = main;
+	}
+
 }

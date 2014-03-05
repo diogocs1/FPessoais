@@ -30,7 +30,7 @@
         </Lighting>
       </effect>
       <font>
-        <Font name="System Bold Italic" size="40.0" fx:id="x1" />
+        <Font name="Lucida Sans Demibold" size="40.0" fx:id="x1" />
       </font>
     </Text>
     <TabPane disable="false" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" side="TOP" style="" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="90.0">
@@ -83,7 +83,7 @@
                         </Lighting>
                       </effect>
                       <font>
-                        <Font name="System Bold Italic" size="30.0" fx:id="x2" />
+                        <Font name="Lucida Sans Demibold" size="30.0" fx:id="x2" />
                       </font>
                     </Text>
                     <Text fill="RED" font="$x2" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="r">
