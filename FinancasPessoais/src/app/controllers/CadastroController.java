@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import model.Usuario;
 import app.Main;
+import app.verif.Verificacao;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -62,11 +63,11 @@ public class CadastroController{
 				String confirmaSenha = pfConfirmaSenha.getText();
 				String dnascimento = txtNascimento.getText();
 				// Verifica se os campos foram preenchidos
-				if (verificaCampos(nome, senha, dnascimento) ){
+				if (Verificacao.verificaCampos(nome, senha, dnascimento) ){
 					// Verifica se a senha confirma nos dois campos
-					if (verificaSenha (senha, confirmaSenha)) {
+					if (Verificacao.verificaSenha (senha, confirmaSenha)) {
 						// Verifica a data de nascimento (formato e quantidade de carácteres)
-						if (verificaNascimento(dnascimento)){
+						if (Verificacao.verificaNascimento(dnascimento)){
 							// Cria um objeto usuário para gerar a linha no Banco de Dados
 							// Usa os dados das caixas de texto
 							Usuario user = new Usuario(nome, senha, dnascimento);
@@ -90,39 +91,6 @@ public class CadastroController{
 			}
 		});
 	}
-	
-	public boolean verificaCampos (String nome, String senha, String dnascimento){
-		/*
-		 * Verifica se os valores passados como parâmetros (valores dos campos) são vazios
-		 * retornando true ou false
-		 */
-		boolean verif = false;
-		if (nome.length() == 0 || senha.length() == 0 || dnascimento.length() == 0) JOptionPane.showMessageDialog(null, "Erro de Integridade: Preencha todos os campos!");
-		else verif = true;
-		return verif;
-	}
-	public boolean verificaSenha (String senha, String confirmaSenha) {
-		/*
-		 * Verifica se a senha dos dois campos confirma
-		 * retornando true ou false
-		 */
-		boolean verif = false;
-		if (senha.equals(confirmaSenha)) verif = true;
-		else JOptionPane.showMessageDialog(null, "Senha não confirmada!");
-		return verif;
-	}
-	public boolean verificaNascimento (String nascimento) {
-		/*
-		 * Verifica formato e quantidade de carácteres do campo data de nascimento
-		 * retorna true ou false para a validação
-		 */
-		String[] nasc = nascimento.split("/");
-		boolean verifi = false;
-		if (nasc.length == 3) verifi = true ;
-		else JOptionPane.showMessageDialog(null, "Data inválida");
-		return verifi;
-	}
-
 	public Main getMain() {
 		return main;
 	}
