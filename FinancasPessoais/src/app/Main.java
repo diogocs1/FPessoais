@@ -2,6 +2,7 @@ package app;
 
 
 import app.controllers.CadastroController;
+import app.controllers.HomeController;
 import app.controllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,9 +22,14 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 	private BorderPane root;
 	
-	private FXMLLoader loaderCadastro;
 	private AnchorPane cadastro;
 	private CadastroController controllerCadastro;
+	
+	private AnchorPane login;
+	private LoginController controllerLogin;
+	
+	private AnchorPane home;
+	private HomeController controllerHome;
 
 	/**
 	 * Instancia a cena a adiciona o cotainer que contÃ©m um BorderPane e a Barra de menus
@@ -35,11 +41,11 @@ public class Main extends Application {
 			root = (BorderPane) rootLoader.load();
 			Scene cena = new Scene(root);
 			primaryStage.setScene(cena);
-			primaryStage.setTitle("Finanças Pessoais 1.0");
+			primaryStage.setTitle("FinanÃ§as Pessoais 1.0");
 			primaryStage.show();
 			login();
 		} catch(Exception e) {
-			Dialogs.showErrorDialog(primaryStage, "Não foi possível iniciar\n" + e.getMessage());
+			Dialogs.showErrorDialog(primaryStage, "NÃ£o foi possÃ­vel iniciar\n" + e.getMessage());
 		}		
 	}
 	
@@ -47,29 +53,31 @@ public class Main extends Application {
 	public void login () {
 		/**
 		 * Carrega a tela de login dentro do root (BorderPane)
-		 * Passa a instância atual da classe Main para o atributo main do
+		 * Passa a instï¿½ncia atual da classe Main para o atributo main do
 		 * LoginController
 		 */
 		try {
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Login.fxml"));
-			AnchorPane login = (AnchorPane) loader.load();
-			root.setCenter(login);
-			
-			LoginController cont = loader.getController();
-			cont.setMain(this);
+			if (login == null){
+				FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Login.fxml"));
+				login = (AnchorPane) loader.load();
+				root.setCenter(login);
+				
+				controllerLogin = loader.getController();
+				controllerLogin.setMain(this);
+			}
 		}catch (Exception e){
-			Dialogs.showErrorDialog(null, "Não é possível carregar a tela inicial!\n" + e.getMessage());
+			Dialogs.showErrorDialog(null, "Nï¿½o ï¿½ possï¿½vel carregar a tela inicial!\n" + e.getMessage());
 		}
 	}
 	public void cadastro () {
 		/**
 		 * Carrega a tela de cadastro dentro do root (BorderPane)
-		 * Passa a instância atual da classe Main para o atributo main do
+		 * Passa a instï¿½ncia atual da classe Main para o atributo main do
 		 * CadastroController
 		 */
 		try{
-			 if (loaderCadastro == null && cadastro == null){
-				 loaderCadastro = new FXMLLoader(Main.class.getResource("view/Cadastro.fxml"));
+			 if (cadastro == null){
+				 FXMLLoader loaderCadastro = new FXMLLoader(Main.class.getResource("view/Cadastro.fxml"));
 				 cadastro = (AnchorPane) loaderCadastro.load();
 				 
 				 controllerCadastro = loaderCadastro.getController();
@@ -80,16 +88,26 @@ public class Main extends Application {
 			Dialogs.showErrorDialog(null, "Erro\n \n" + e.getMessage());
 		}
 	}
-//	public static void inicio () {
-//		/**
-//		 * Carrega a tela inicial dentro do root (BorderPane)
-//		 */
-//		root.setCenter(null);;
-//		root.setCenter(inicio);
-//	}
+	public void inicio () {
+		/**
+		 * Carrega a tela inicial dentro do root (BorderPane)
+		 */
+		try {
+			if (home == null){
+				FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Home.fxml"));
+				home = (AnchorPane) loader.load();
+				// Somente descomentar apÃ³s a implementaÃ§Ã£o da classe HomeController
+//				controllerHome = loader.getController();
+//				controllerHome.setMain(this);
+			}
+			root.setCenter(home);
+		}catch (Exception e){
+			Dialogs.showErrorDialog(null, "NÃ£o Ã© possÃ­vel exibir a tela inicial\n \n" + e.getMessage());
+		}
+	}
 	public static void main(String[] args) {
 		/**
-		 * Método usado apenas em caso de erros no mÃ©todo start para inicializar.
+		 * Mï¿½todo usado apenas em caso de erros no mÃ©todo start para inicializar.
 		 */
 		launch(args);
 	}
