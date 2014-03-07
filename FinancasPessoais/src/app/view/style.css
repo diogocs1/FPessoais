@@ -1,6 +1,9 @@
 .background {
 	-fx-background-color: #1d1d1d;
 }
+.texto-titulo {
+	-fx-font-family: "Times New Roman";
+}
 .label {
 	-fx-font-size: 13pt;
 	-fx-font-family: "Arial Black";
@@ -37,17 +40,26 @@
 .tab-pane *.tab-header-background {
 	-fx-opacity:0.0;
 }
-.tab {
-	-fx-background-color:rgb(0,136,139);
-	-fx-border-radius:8;
-	-fx-background-radius:8;
-	-fx-padding:5;
+.tab-inicio {
+	-fx-padding:25 0 71 0;
 }
-.tab .tab-label {
-	-fx-text-fill:rgb(255,255,255);
+.tab-conta {
+	-fx-padding:48 -39;
+}
+.tab-ganhos {
+	-fx-padding:25 -7 71 -7;
+}
+.tab-despesas {
+	-fx-padding:30 -14 66 -14;
+}
+.tab-label {
+	-fx-rotate: 90;
+}
+.tab{
+	-fx-background-radius: 5 5 10 10; 
 }
 .tab:selected {
-	-fx-background-color:rgb(127,127,127);
+	-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(grey,0%) 99%, -fx-box-border);
 }
 .menu-item .label {
 	-fx-text-fill:black ;
@@ -95,5 +107,27 @@
 }
 .tool-bar {
 	-fx-background-radius: 0 20 20 0;
-	-fx-background-color:rgb(255,0,0)
 }
+.botao-remover {
+	-fx-background-color: rgb(255,0,0);
+}
+.label-detalhes {
+	-fx-text-fill: black;
+}
+.split-conta {
+	-fx-background-color: rgb(125,125,125);
+	-fx-background-radius: 0 0 20 20;
+}
+.detalhes-painel {
+	-fx-background-color:rgb(26,26,26);
+	-fx-background-radius:0 0 20 20;
+	-fx-border-radius: 0 0 20 20;
+}
+
+
+
+
+
+
+
+

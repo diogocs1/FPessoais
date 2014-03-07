@@ -2,7 +2,7 @@ package app;
 
 
 import app.controllers.CadastroController;
-import app.controllers.HomeController;
+//import app.controllers.HomeController;
 import app.controllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -29,7 +29,7 @@ public class Main extends Application {
 	private LoginController controllerLogin;
 	
 	private AnchorPane home;
-	private HomeController controllerHome;
+//	private HomeController controllerHome;
 
 	/**
 	 * Instancia a cena a adiciona o cotainer que contém um BorderPane e a Barra de menus

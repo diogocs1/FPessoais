@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import model.Usuario;
 import app.Main;
-import app.verif.Verificacao;
+import app.verif.Verifica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,7 +67,7 @@ public class LoginController{
 					//a partir do nome de usuário digitado na caixa de texto que é passado comoparâmetro
 					Usuario user = new Dados().getUsuario(txUsuario.getText());
 					// Verifica se o usuário digitou a senha correta, à partir do método que compara o valor dos campos com o valor do atributo do objeto pesquisado
-					if (Verificacao.verificaUsuario (user, txUsuario.getText(), txSenha.getText())){
+					if (Verifica.verificaUsuario (user, txUsuario.getText(), txSenha.getText())){
 						main.inicio();
 					}
 				} catch (SQLException e) {
@@ -92,7 +92,7 @@ public class LoginController{
 						// Consulta o usuário a partir do texto digitado
 						Usuario user = new Dados().getUsuario(rdfUsuario.getText());
 						// Verifica se os valores passados são iguais aos valores salvos no Banco de dados
-						if (Verificacao.rdfVerifiUsuario (user, rdfUsuario.getText(), rdfNascimento.getText() ) ){
+						if (Verifica.rdfVerifiUsuario (user, rdfUsuario.getText(), rdfNascimento.getText() ) ){
 							// Grava a nova senha no Banco de Dados
 							new Dados().redefinirSenha(user.getNome(), rdfSenha.getText());
 							Dialogs.showInformationDialog(null, "Senha redefinida!");

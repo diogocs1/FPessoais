@@ -2,21 +2,20 @@ package app.controllers;
 
 import java.sql.SQLException;
 
-import javax.swing.JOptionPane;
-
 import model.Usuario;
 import app.Main;
-import app.verif.Verificacao;
+import app.verif.Verifica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import jdbc.Dados;
 
 public class CadastroController{
-	/*
+	/**
 	 * Possui como atributos elementos declarados no FXML (@FXML), apenas os elementos
 	 * controláveis.
 	 * É necessário idenficar os atributos no FXML (feito através do SceneBuilder)
@@ -39,7 +38,7 @@ public class CadastroController{
 	
 	@FXML
 	public void initialize() {
-		/*
+		/**
 		 * Método padrão para inicializar o controlador FXML
 		 * 
 		 * Classes anônimas implementadas para configurar ações para os elementos do
@@ -57,30 +56,25 @@ public class CadastroController{
 		btSalvar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle (ActionEvent evt){
-				// Obtém os dados da caixa de texto e senhas
-				String nome = txtUsuario.getText();
-				String senha = pfSenha.getText();
-				String confirmaSenha = pfConfirmaSenha.getText();
-				String dnascimento = txtNascimento.getText();
 				// Verifica se os campos foram preenchidos
-				if (Verificacao.verificaCampos(nome, senha, dnascimento) ){
+				if (Verifica.verificaCampos(txtUsuario.getText(), pfSenha.getText(), txtNascimento.getText()) ){
 					// Verifica se a senha confirma nos dois campos
-					if (Verificacao.verificaSenha (senha, confirmaSenha)) {
+					if (Verifica.verificaSenha (pfSenha.getText(), pfConfirmaSenha.getText())) {
 						// Verifica a data de nascimento (formato e quantidade de carácteres)
-						if (Verificacao.verificaNascimento(dnascimento)){
+						if (Verifica.verificaNascimento(txtNascimento.getText())){
 							// Cria um objeto usuário para gerar a linha no Banco de Dados
 							// Usa os dados das caixas de texto
-							Usuario user = new Usuario(nome, senha, dnascimento);
+							Usuario user = new Usuario(txtUsuario.getText(), pfSenha.getText(), txtNascimento.getText());
 							try {
 								// Instancia a classe que contém como atributo a conexão com o Banco de Dados
 								// conectando a aplicação com o servidor e executa o método criarUsuario()
 								// passando como parâmetros o usuário criado anteriormente
 								new Dados().criarUsuario(user);
-								JOptionPane.showMessageDialog(null, "Usuário Cadastrado!");
+								Dialogs.showInformationDialog(null, "Usuário Cadastrado!");
 							}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e){
-								JOptionPane.showMessageDialog(null, "Usuário já está cadastrado!");
+								Dialogs.showInformationDialog(null, "Usuário já está cadastrado!");
 							} catch (SQLException e){
-								JOptionPane.showMessageDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
+								Dialogs.showErrorDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
 								System.out.println(e.getMessage());
 							}
 							// Após o fim do cadastro, retorna para a tela de Login
@@ -97,5 +91,4 @@ public class CadastroController{
 	public void setMain(Main main) {
 		this.main = main;
 	}
-	
 }

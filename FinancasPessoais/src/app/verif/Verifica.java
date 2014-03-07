@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javafx.scene.control.Dialogs;
 import model.Usuario;
 
-public class Verificacao {
+public class Verifica {
 	public static boolean verificaUsuario (Usuario user, String nome, String senha) {
 		/**
 		 * Recebe como parâmetros um Objeto do tipo usuário, recuperado do banco de dados
