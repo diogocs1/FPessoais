@@ -35,7 +35,7 @@
     </Text>
     <TabPane disable="false" prefHeight="540.0" prefWidth="760.0" rotateGraphic="true" side="LEFT" style="" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
       <tabs>
-        <Tab id="" style="" styleClass="tab-inicio, tab-lateral" text="Inicio">
+        <Tab id="" style="" styleClass="tab-inicio" text="Inicio">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="740.0">
               <children>

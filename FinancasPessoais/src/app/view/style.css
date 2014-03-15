@@ -123,11 +123,24 @@
 	-fx-background-radius:0 0 20 20;
 	-fx-border-radius: 0 0 20 20;
 }
-
-
-
-
-
-
+.background-window {
+	-fx-background-color: linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);
+}
+.tab-content {
+	-fx-background-color:rgb(127,127,127);
+	-fx-background-radius:20;
+}
+.tab0{
+	-fx-background-radius: 5 5 10 10; 
+}
+.tab0:selected {
+	-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(grey,0%) 99%, -fx-box-border);
+}
+.cadastro-pane {
+	-fx-background-color:linear-gradient(to bottom, derive(grey,-02%), derive(grey,65%) 12%, derive(grey,23%) 88%, derive(black,50%) 99%, -fx-box-border);
+	-fx-background-radius:20;
+	-fx-border-radius: 20;
+	-fx-border-color:rgb(0,0,0)
+}
 
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="background-window" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Text fill="WHITE" layoutX="48.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Conta">
+      <effect>
+        <Lighting diffuseConstant="2.0" surfaceScale="1.893700787401575">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Point color="#009987" x="100.0" y="100.0" z="50.0" />
+          </light>
+        </Lighting>
+      </effect>
+      <font>
+        <Font name="System Bold Italic" size="30.0" />
+      </font>
+    </Text>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9f9f9f" height="219.0" layoutX="14.0" layoutY="49.0" stroke="BLACK" strokeType="INSIDE" width="272.0" />
+    <GridPane layoutX="31.0" layoutY="65.0" prefWidth="238.0">
+      <children>
+        <Label style="-fx-text-fill: black" text="Titular" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label style="-fx-text-fill: black" text="Banco" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label style="-fx-text-fill: black" text="Número" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label style="-fx-text-fill: black" text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label style="-fx-text-fill: black" text="Saldo Atual" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <ChoiceBox prefWidth="124.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+          <GridPane.margin>
+            <Insets left="30.0" fx:id="x1" />
+          </GridPane.margin>
+        </ChoiceBox>
+        <ChoiceBox prefWidth="124.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <GridPane.margin>
+            <Insets left="50.0" />
+          </GridPane.margin>
+        </TextField>
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="89.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="149.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <HBox id="HBox" alignment="CENTER" layoutX="126.0" layoutY="223.0" spacing="5.0">
+      <children>
+        <Button mnemonicParsing="false" text="Salvar" />
+        <Button mnemonicParsing="false" text="Cancelar" />
+      </children>
+    </HBox>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
+</AnchorPane>

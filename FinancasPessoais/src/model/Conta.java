@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class Conta {
+	private int id;
 	private Historico historico;
 	private Usuario pessoa;
 	private String agencia;
@@ -12,6 +13,15 @@ public class Conta {
 	private double saldo;
 	
 	public Conta(Usuario pessoa ,String banco, String agencia, String conta, String tipo) {
+		setPessoa(pessoa);
+		setBanco(banco);
+		setAgencia(agencia);
+		setConta(conta);
+		setTipo(tipo);
+		setHistorico(new Historico("Nova Conta", new Date(), "Nova conta criada"));
+	}
+	public Conta(int id,Usuario pessoa ,String banco, String agencia, String conta, String tipo) {
+		setId(id);
 		setPessoa(pessoa);
 		setBanco(banco);
 		setAgencia(agencia);
@@ -61,6 +71,12 @@ public class Conta {
 	}
 	public void setHistorico(Historico historico) {
 		this.historico = historico;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
