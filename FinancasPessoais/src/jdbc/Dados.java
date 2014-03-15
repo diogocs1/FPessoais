@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 import model.Usuario;
 
@@ -71,21 +72,17 @@ public class Dados {
 		st.execute();
 		st.close();
 	}
-//	public ArrayList<Usuario> getUsuario (String nome) throws SQLException {
-//		String sql = "select * from usuario where nome = (nome)" +
-//					"values (?)";
-//		PreparedStatement st = conn.prepareStatement(sql);
-//		ResultSet rs = st.executeQuery();
-//		
-//		ArrayList<Usuario> users = new ArrayList<Usuario>();
-//		while (rs.next()){
-//			Usuario user = new Usuario(rs.getString("nome"), 
-//										rs.getString("senha"),
-//										rs.getString("nascimento"));
-//			users.add(user);
-//		}
-//		rs.close();
-//		st.close();
-//		return users;
-//	}
+	public ArrayList<String> getBancos () throws SQLException {
+		String sql = "select * from bancos";
+		PreparedStatement st = conn.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		
+		ArrayList<String> bancos = new ArrayList<String>();
+		while (rs.next()){
+			bancos.add(rs.getString("idbanco")+ " - "+ rs.getString("nome"));
+		}
+		rs.close();
+		st.close();
+		return bancos;
+	}
 }
