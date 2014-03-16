@@ -2,7 +2,7 @@ package app;
 
 
 import app.controllers.CadastroController;
-//import app.controllers.HomeController;
+import app.controllers.HomeController;
 import app.controllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,6 +20,8 @@ import javafx.fxml.FXMLLoader;
  * 		root, cadastro, itens, inicio ---> Containers que contém os elementos de cada cena (Arquivos FXML)
  */
 public class Main extends Application {
+	private Stage primaryStage;
+	
 	private BorderPane root;
 	
 	private AnchorPane cadastro;
@@ -29,7 +31,7 @@ public class Main extends Application {
 	private LoginController controllerLogin;
 	
 	private AnchorPane home;
-//	private HomeController controllerHome;
+	private HomeController controllerHome;
 
 	/**
 	 * Instancia a cena a adiciona o cotainer que contém um BorderPane e a Barra de menus
@@ -40,9 +42,10 @@ public class Main extends Application {
 			FXMLLoader rootLoader = new FXMLLoader(Main.class.getResource("view/Border.fxml"));
 			root = (BorderPane) rootLoader.load();
 			Scene cena = new Scene(root);
-			primaryStage.setScene(cena);
-			primaryStage.setTitle("Finanças Pessoais 1.0");
-			primaryStage.show();
+			this.primaryStage = primaryStage;
+			this.primaryStage.setScene(cena);
+			this.primaryStage.setTitle("Finanças Pessoais 1.0");
+			this.primaryStage.show();
 			login();
 		} catch(Exception e) {
 			Dialogs.showErrorDialog(primaryStage, "Não foi possível iniciar\n" + e.getMessage());
@@ -96,8 +99,8 @@ public class Main extends Application {
 				FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Home.fxml"));
 				home = (AnchorPane) loader.load();
 				// Somente descomentar após a implementação da classe HomeController
-//				controllerHome = loader.getController();
-//				controllerHome.setMain(this);
+				controllerHome = loader.getController();
+				controllerHome.setMain(this);
 			}
 			root.setCenter(home);
 		}catch (Exception e){
@@ -109,5 +112,9 @@ public class Main extends Application {
 		 * M�todo usado apenas em caso de erros no método start para inicializar.
 		 */
 		launch(args);
+	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
 	}
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.HomeController">
   <!-- TODO Add Nodes -->
   <children>
     <Text fill="radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 100.0px 100.0px, radius 200.0px, 0xff0000ff 0.0%, 0x0000ffff 30.0%, 0x000000ff 100.0%)" fontSmoothingType="LCD" layoutX="30.0" layoutY="51.0" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" style="" text="Finanças Pessoais">
@@ -30,7 +30,7 @@
         </Lighting>
       </effect>
       <font>
-        <Font name="DejaVu Sans Bold Oblique" size="40.0" />
+        <Font name="DejaVu Sans Bold" size="40.0" />
       </font>
     </Text>
     <TabPane disable="false" prefHeight="540.0" prefWidth="760.0" rotateGraphic="true" side="LEFT" style="" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
@@ -328,7 +328,7 @@
                       <children>
                         <ToolBar layoutX="0.0" AnchorPane.bottomAnchor="0.0">
                           <items>
-                            <Button mnemonicParsing="false" text="Nova Conta" />
+                            <Button fx:id="novaConta" mnemonicParsing="false" text="Nova Conta" />
                             <Button mnemonicParsing="false" text="Editar Conta" />
                             <Button mnemonicParsing="false" styleClass="botao-remover" text="Remover Conta" />
                           </items>

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="background-window" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="background-window" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.CadastroContaController">
   <!-- TODO Add Nodes -->
   <children>
     <Text fill="WHITE" layoutX="48.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Nova Conta">
@@ -37,7 +37,7 @@
         <Label style="-fx-text-fill: black" text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label style="-fx-text-fill: black" text="Saldo Atual" GridPane.columnIndex="0" GridPane.rowIndex="4" />
         <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <ChoiceBox prefWidth="124.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <ChoiceBox fx:id="banco" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -46,10 +46,10 @@
             </FXCollections>
           </items>
           <GridPane.margin>
-            <Insets left="30.0" fx:id="x1" />
+            <Insets fx:id="x2" />
           </GridPane.margin>
         </ChoiceBox>
-        <ChoiceBox prefWidth="124.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2">
+        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="2">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -63,7 +63,11 @@
             <Insets left="50.0" />
           </GridPane.margin>
         </TextField>
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <GridPane.margin>
+            <Insets left="30.0" fx:id="x1" />
+          </GridPane.margin>
+        </TextField>
         <Label style="-fx-text-fill: black" text="Prioridade" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="5">
           <items>
@@ -93,7 +97,7 @@
     </GridPane>
     <HBox id="HBox" alignment="CENTER" layoutX="152.0" layoutY="249.0" spacing="5.0">
       <children>
-        <Button mnemonicParsing="false" text="Salvar" />
+        <Button fx:id="btSalvar" mnemonicParsing="false" text="Salvar" />
         <Button mnemonicParsing="false" text="Cancelar" />
       </children>
     </HBox>
