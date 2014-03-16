@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import model.Usuario;
 import app.Main;
-import app.verif.Verifica;
+import app.logica.Verifica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -71,8 +71,6 @@ public class CadastroController{
 								// passando como parâmetros o usuário criado anteriormente
 								new Dados().criarUsuario(user);
 								Dialogs.showInformationDialog(null, "Usuário Cadastrado!");
-							}catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e){
-								Dialogs.showInformationDialog(null, "Usuário já está cadastrado!");
 							} catch (SQLException e){
 								Dialogs.showErrorDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
 								System.out.println(e.getMessage());

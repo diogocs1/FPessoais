@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import model.Usuario;
 import app.Main;
-import app.verif.Verifica;
+import app.logica.Verifica;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

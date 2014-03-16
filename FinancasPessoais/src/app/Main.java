@@ -60,11 +60,10 @@ public class Main extends Application {
 			if (login == null){
 				FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Login.fxml"));
 				login = (AnchorPane) loader.load();
-				root.setCenter(login);
-				
 				controllerLogin = loader.getController();
 				controllerLogin.setMain(this);
 			}
+			root.setCenter(login);
 		}catch (Exception e){
 			Dialogs.showErrorDialog(null, "N�o � poss�vel carregar a tela inicial!\n" + e.getMessage());
 		}

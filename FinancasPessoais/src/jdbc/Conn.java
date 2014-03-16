@@ -9,14 +9,16 @@ public class Conn {
 	 * Classe de conexão com o Banco de dados MySQL, usando o driver com.mysql.jdbc.Driver
 	 * 
 	 */
-	public static Connection getConexao() throws SQLException {
+	public static Connection getConexao() {
 		try {
-			//Retrona a conexão para uso posterior em outros métodos
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.sqlite.JDBC");
 			System.out.println("Conectando banco de dados...");
-			return DriverManager.getConnection("jdbc:mysql://localhost:3306/FinancasPessoais", "fp", "fp");
+			return DriverManager.getConnection("jdbc:sqlite:FinancasPessoais.db");
 		} catch (ClassNotFoundException e) {
-			throw new SQLException(e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 }
