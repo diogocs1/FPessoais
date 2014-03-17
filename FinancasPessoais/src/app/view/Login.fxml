@@ -28,7 +28,7 @@
         </Lighting>
       </effect>
       <font>
-        <Font name="Arial Black" size="40.0" />
+        <Font name="DejaVu Sans Bold" size="40.0" />
       </font>
     </Text>
     <VBox id="VBox" alignment="CENTER" layoutX="335.0" layoutY="322.0" spacing="5.0">

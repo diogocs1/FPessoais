@@ -1,6 +1,7 @@
 package app;
 
 
+import model.Usuario;
 import app.controllers.CadastroController;
 import app.controllers.HomeController;
 import app.controllers.LoginController;
@@ -21,6 +22,8 @@ import javafx.fxml.FXMLLoader;
  */
 public class Main extends Application {
 	private Stage primaryStage;
+	// Armazena o usuário atual
+	private Usuario user;
 	
 	private BorderPane root;
 	
@@ -108,13 +111,22 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-		/**
-		 * M�todo usado apenas em caso de erros no método start para inicializar.
+		/*
+		 * Método usado apenas em caso de erros no método start para inicializar.
 		 */
 		launch(args);
 	}
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
+	}
+	public Usuario getUser() {
+		return user;
+	}
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+	public HomeController getControllerHome() {
+		return controllerHome;
 	}
 }

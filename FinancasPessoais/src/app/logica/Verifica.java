@@ -73,4 +73,18 @@ public class Verifica {
 		else JOptionPane.showMessageDialog(null, "Data inválida");
 		return verifi;
 	}
+	public static boolean campoVazio (String campo){
+		boolean verifi = false;
+		if (!campo.isEmpty()){
+			verifi = true;
+		}
+		return verifi;
+	}
+	public static boolean campoVazio (double campo){
+		boolean verifi = false;
+		if (!String.valueOf(campo).isEmpty()){
+			verifi = true;
+		}
+		return verifi;
+	}
 }

@@ -13,6 +13,12 @@ public class Usuario {
 		setSenha(senha);
 		setNascimento(nascimento);
 	}
+	public Usuario (int id, String nome, String senha, String nascimento) {
+		setId(id);
+		setNome(nome);
+		setSenha(senha);
+		setNascimento(nascimento);
+	}
 	
 	public String getNome() {
 		return nome;
@@ -37,5 +43,9 @@ public class Usuario {
 	}
 	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
+	}
+	@Override
+	public String toString() {
+		return this.nome;
 	}
 }

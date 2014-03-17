@@ -29,15 +29,15 @@
         <Font name="System Bold Italic" size="30.0" />
       </font>
     </Text>
-    <GridPane layoutX="31.0" layoutY="57.0" prefWidth="238.0">
+    <GridPane layoutX="31.0" layoutY="70.0" prefWidth="238.0">
       <children>
         <Label style="-fx-text-fill: black" text="Titular" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label style="-fx-text-fill: black" text="Banco" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label style="-fx-text-fill: black" text="Número" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Label style="-fx-text-fill: black" text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label style="-fx-text-fill: black" text="Saldo Atual" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <ChoiceBox fx:id="banco" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TextField fx:id="titular" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <ChoiceBox fx:id="tipo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -49,27 +49,22 @@
             <Insets fx:id="x2" />
           </GridPane.margin>
         </ChoiceBox>
-        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="2">
-          <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
-          </items>
-        </ChoiceBox>
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <TextField fx:id="numero" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="50.0" />
           </GridPane.margin>
         </TextField>
-        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <TextField fx:id="saldo" prefWidth="200.0" promptText="000,00" GridPane.columnIndex="1" GridPane.rowIndex="4">
           <GridPane.margin>
             <Insets left="30.0" fx:id="x1" />
           </GridPane.margin>
         </TextField>
-        <Label style="-fx-text-fill: black" text="Prioridade" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <ChoiceBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Label style="-fx-text-fill: black" text="R$" GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <GridPane.margin>
+            <Insets left="10.0" />
+          </GridPane.margin>
+        </Label>
+        <ChoiceBox fx:id="banco" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -77,9 +72,6 @@
               <String fx:value="Item 3" />
             </FXCollections>
           </items>
-          <GridPane.margin>
-            <Insets left="60.0" />
-          </GridPane.margin>
         </ChoiceBox>
       </children>
       <columnConstraints>
@@ -92,13 +84,12 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
     <HBox id="HBox" alignment="CENTER" layoutX="152.0" layoutY="249.0" spacing="5.0">
       <children>
         <Button fx:id="btSalvar" mnemonicParsing="false" text="Salvar" />
-        <Button mnemonicParsing="false" text="Cancelar" />
+        <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" />
       </children>
     </HBox>
   </children>

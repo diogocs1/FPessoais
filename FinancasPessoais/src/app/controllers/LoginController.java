@@ -13,7 +13,7 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import jdbc.Dados;
+import jdbc.DadosLogin;
 
 public class LoginController{
 	/**
@@ -65,10 +65,11 @@ public class LoginController{
 				try {
 					//Obtém do banco de dados os atributos do usuário através do método getUsuario()
 					//a partir do nome de usuário digitado na caixa de texto que é passado comoparâmetro
-					Usuario user = new Dados().getUsuario(txUsuario.getText());
+					Usuario user = new DadosLogin().getUsuario(txUsuario.getText());
 					// Verifica se o usuário digitou a senha correta, à partir do método que compara o valor dos campos com o valor do atributo do objeto pesquisado
 					if (Verifica.verificaUsuario (user, txUsuario.getText(), txSenha.getText())){
 						main.inicio();
+						main.setUser(user);
 					}
 				} catch (SQLException e) {
 					Dialogs.showErrorDialog(null, "Problema no Banco de dados:\n \n" + e.getMessage());
@@ -90,11 +91,11 @@ public class LoginController{
 				public void handle (ActionEvent evt) {
 					try {
 						// Consulta o usuário a partir do texto digitado
-						Usuario user = new Dados().getUsuario(rdfUsuario.getText());
+						Usuario user = new DadosLogin().getUsuario(rdfUsuario.getText());
 						// Verifica se os valores passados são iguais aos valores salvos no Banco de dados
 						if (Verifica.rdfVerifiUsuario (user, rdfUsuario.getText(), rdfNascimento.getText() ) ){
 							// Grava a nova senha no Banco de Dados
-							new Dados().redefinirSenha(user.getNome(), rdfSenha.getText());
+							new DadosLogin().redefinirSenha(user.getNome(), rdfSenha.getText());
 							Dialogs.showInformationDialog(null, "Senha redefinida!");
 							redefinir.setVisible(false);
 						}

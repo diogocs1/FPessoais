@@ -1,18 +1,13 @@
 package app.controllers;
 
-import java.sql.SQLException;
-
-import model.Usuario;
 import app.Main;
-import app.logica.Verifica;
+import app.logica.Cadastro;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialogs;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import jdbc.Dados;
 
 public class CadastroController{
 	/**
@@ -56,30 +51,9 @@ public class CadastroController{
 		btSalvar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle (ActionEvent evt){
-				// Verifica se os campos foram preenchidos
-				if (Verifica.verificaCampos(txtUsuario.getText(), pfSenha.getText(), txtNascimento.getText()) ){
-					// Verifica se a senha confirma nos dois campos
-					if (Verifica.verificaSenha (pfSenha.getText(), pfConfirmaSenha.getText())) {
-						// Verifica a data de nascimento (formato e quantidade de carácteres)
-						if (Verifica.verificaNascimento(txtNascimento.getText())){
-							// Cria um objeto usuário para gerar a linha no Banco de Dados
-							// Usa os dados das caixas de texto
-							Usuario user = new Usuario(txtUsuario.getText(), pfSenha.getText(), txtNascimento.getText());
-							try {
-								// Instancia a classe que contém como atributo a conexão com o Banco de Dados
-								// conectando a aplicação com o servidor e executa o método criarUsuario()
-								// passando como parâmetros o usuário criado anteriormente
-								new Dados().criarUsuario(user);
-								Dialogs.showInformationDialog(null, "Usuário Cadastrado!");
-							} catch (SQLException e){
-								Dialogs.showErrorDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
-								System.out.println(e.getMessage());
-							}
-							// Após o fim do cadastro, retorna para a tela de Login
-							main.login();
-						}
-					}
-				}
+				Cadastro.cadastraUsuario(txtUsuario.getText(), pfSenha.getText(),pfConfirmaSenha.getText(), txtNascimento.getText());
+				// Após o fim do cadastro, retorna para a tela de Login
+				main.login();
 			}
 		});
 	}

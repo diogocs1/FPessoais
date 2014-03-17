@@ -6,36 +6,29 @@ public class Conta {
 	private int id;
 	private Historico historico;
 	private Usuario pessoa;
-	private String agencia;
 	private String tipo;
 	private String conta;
 	private String banco;
 	private double saldo;
 	
-	public Conta(Usuario pessoa ,String banco, String agencia, String conta, String tipo) {
+	public Conta(Usuario pessoa ,String banco, String conta, String tipo, double saldo) {
 		setPessoa(pessoa);
 		setBanco(banco);
-		setAgencia(agencia);
 		setConta(conta);
 		setTipo(tipo);
+		depositar(saldo);
 		setHistorico(new Historico("Nova Conta", new Date(), "Nova conta criada"));
 	}
-	public Conta(int id,Usuario pessoa ,String banco, String agencia, String conta, String tipo) {
+	public Conta(int id,Usuario pessoa ,String banco, String conta, String tipo, double saldo) {
 		setId(id);
 		setPessoa(pessoa);
 		setBanco(banco);
-		setAgencia(agencia);
 		setConta(conta);
 		setTipo(tipo);
+		depositar(saldo);
 		setHistorico(new Historico("Nova Conta", new Date(), "Nova conta criada"));
 	}
 
-	public String getAgencia() {
-		return agencia;
-	}
-	public void setAgencia(String agencia) {
-		this.agencia = agencia;
-	}
 	public String getTipo() {
 		return tipo;
 	}
@@ -77,6 +70,10 @@ public class Conta {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "ID: "+ id + " Num: " + conta;
 	}
 	
 }
