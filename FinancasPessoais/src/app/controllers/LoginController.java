@@ -2,9 +2,10 @@ package app.controllers;
 
 import java.sql.SQLException;
 
-import model.Usuario;
 import app.Main;
+import app.jdbc.DadosLogin;
 import app.logica.Verifica;
+import app.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,7 +14,6 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import jdbc.DadosLogin;
 
 public class LoginController{
 	/**

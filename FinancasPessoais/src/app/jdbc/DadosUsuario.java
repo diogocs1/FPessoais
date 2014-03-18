@@ -1,9 +1,9 @@
-package jdbc;
+package app.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.Usuario;
+import app.model.Usuario;
 
 public class DadosUsuario extends BD{
 	public void criarUsuario (Usuario user) throws SQLException{

@@ -1,12 +1,14 @@
 package app.logica;
 
 import java.sql.SQLException;
+import java.util.Date;
 
+import app.jdbc.DadosConta;
+import app.jdbc.DadosUsuario;
+import app.model.Acao;
+import app.model.Conta;
+import app.model.Usuario;
 import javafx.scene.control.Dialogs;
-import jdbc.DadosConta;
-import jdbc.DadosUsuario;
-import model.Conta;
-import model.Usuario;
 
 public class Cadastro {
 	public static void cadastraUsuario (String usuario, String senha,String confirmaSenha, String nascimento){
@@ -48,6 +50,10 @@ public class Cadastro {
 	public static void editaConta (Conta antigaConta, Usuario pessoa, String banco, String conta,String tipo, double saldo){
 		if (Verifica.campoVazio(banco) && Verifica.campoVazio(conta)&& Verifica.campoVazio(tipo) && Verifica.campoVazio(saldo)){
 			Conta novaConta = new Conta(pessoa, banco, conta, tipo, saldo);
+			// Adiciona a edição ao histórico
+			novaConta.addAcao(
+					new Acao(new Date(), novaConta.toHistorico())
+					);
 			try{
 				new DadosConta().editaConta(antigaConta, novaConta);
 			}catch (SQLException e){

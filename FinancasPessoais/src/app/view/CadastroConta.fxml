@@ -31,13 +31,11 @@
     </Text>
     <GridPane layoutX="31.0" layoutY="70.0" prefWidth="238.0">
       <children>
-        <Label style="-fx-text-fill: black" text="Titular" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label style="-fx-text-fill: black" text="Banco" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label style="-fx-text-fill: black" text="Número" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <Label style="-fx-text-fill: black" text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label style="-fx-text-fill: black" text="Saldo Atual" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="titular" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <ChoiceBox fx:id="tipo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Label style="-fx-text-fill: black" text="Banco" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label style="-fx-text-fill: black" text="Número" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label style="-fx-text-fill: black" text="Tipo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label style="-fx-text-fill: black" text="Saldo Atual" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <ChoiceBox fx:id="tipo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -49,22 +47,22 @@
             <Insets fx:id="x2" />
           </GridPane.margin>
         </ChoiceBox>
-        <TextField fx:id="numero" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <TextField fx:id="numero" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <GridPane.margin>
             <Insets left="50.0" />
           </GridPane.margin>
         </TextField>
-        <TextField fx:id="saldo" prefWidth="200.0" promptText="000,00" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <TextField fx:id="saldo" prefWidth="200.0" promptText="000,00" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="30.0" fx:id="x1" />
           </GridPane.margin>
         </TextField>
-        <Label style="-fx-text-fill: black" text="R$" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Label style="-fx-text-fill: black" text="R$" GridPane.columnIndex="1" GridPane.rowIndex="3">
           <GridPane.margin>
             <Insets left="10.0" />
           </GridPane.margin>
         </Label>
-        <ChoiceBox fx:id="banco" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <ChoiceBox fx:id="banco" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -79,7 +77,6 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="149.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

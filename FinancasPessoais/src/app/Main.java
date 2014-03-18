@@ -1,10 +1,10 @@
 package app;
 
 
-import model.Usuario;
 import app.controllers.CadastroController;
 import app.controllers.HomeController;
 import app.controllers.LoginController;
+import app.model.Usuario;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;

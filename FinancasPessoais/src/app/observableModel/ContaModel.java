@@ -1,6 +1,6 @@
 package app.observableModel;
 
-import model.Conta;
+import app.model.Conta;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 

@@ -2,8 +2,8 @@ package app.logica;
 
 import javax.swing.JOptionPane;
 
+import app.model.Usuario;
 import javafx.scene.control.Dialogs;
-import model.Usuario;
 
 public class Verifica {
 	public static boolean verificaUsuario (Usuario user, String nome, String senha) {

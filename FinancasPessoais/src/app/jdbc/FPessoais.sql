@@ -1,10 +1,9 @@
 CREATE TABLE IF NOT EXISTS `conta` (
   `idconta` INTEGER PRIMARY KEY,
   `banco` VARCHAR(45) NOT NULL,
-  `agencia` VARCHAR(45) NOT NULL,
   `num` VARCHAR(45) NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
-  `saldo` VARCHAR(45) NOT NULL DEFAULT '0',
+  `saldo` DOUBLE NOT NULL DEFAULT '0',
   `usuario_idusuario` INT(11) NOT NULL,
   CONSTRAINT `fk_conta_usuario`
     FOREIGN KEY (`usuario_idusuario`)
@@ -45,7 +44,10 @@ CREATE TABLE IF NOT EXISTS `historico` (
   `idhistorico` INTEGER PRIMARY KEY,
   `titulo` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(45) NOT NULL,
-  `data` DATE NOT NULL);
+  `data` DATE NOT NULL,
+  `conta_idconta` INTEGER(11) NOT NULL,
+  CONSTRAINT `fk_historico_conta`
+    FOREIGN KEY (`conta_idconta`) REFERENCES `conta`(`idconta`));
 
 CREATE TABLE IF NOT EXISTS `bancos` (
   `idbanco` INT(11) NOT NULL,

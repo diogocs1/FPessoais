@@ -4,10 +4,11 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import model.Conta;
 import app.Main;
+import app.jdbc.DadosConta;
 import app.logica.Cadastro;
 import app.logica.Normaliza;
+import app.model.Conta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextField;
-import jdbc.DadosConta;
 
 
 public class CadastroContaController implements Initializable{

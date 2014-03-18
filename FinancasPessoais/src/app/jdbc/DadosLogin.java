@@ -1,10 +1,10 @@
-package jdbc;
+package app.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Usuario;
+import app.model.Usuario;
 
 public class DadosLogin extends BD{
 	public void redefinirSenha (String nome, String novaSenha) throws SQLException {

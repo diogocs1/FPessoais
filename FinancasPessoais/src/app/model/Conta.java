@@ -1,10 +1,11 @@
-package model;
+package app.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Conta {
 	private int id;
-	private Historico historico;
+	private ArrayList<Acao> historico;
 	private Usuario pessoa;
 	private String tipo;
 	private String conta;
@@ -17,7 +18,7 @@ public class Conta {
 		setConta(conta);
 		setTipo(tipo);
 		depositar(saldo);
-		setHistorico(new Historico("Nova Conta", new Date(), "Nova conta criada"));
+		addAcao(new Acao(new Date(), "Nova conta criada"));
 	}
 	public Conta(int id,Usuario pessoa ,String banco, String conta, String tipo, double saldo) {
 		setId(id);
@@ -26,7 +27,7 @@ public class Conta {
 		setConta(conta);
 		setTipo(tipo);
 		depositar(saldo);
-		setHistorico(new Historico("Nova Conta", new Date(), "Nova conta criada"));
+		addAcao(new Acao(new Date(), "Nova conta criada"));
 	}
 
 	public String getTipo() {
@@ -59,11 +60,11 @@ public class Conta {
 	public void setPessoa(Usuario pessoa) {
 		this.pessoa = pessoa;
 	}
-	public Historico getHistorico() {
+	public ArrayList<Acao> getHistorico() {
 		return historico;
 	}
-	public void setHistorico(Historico historico) {
-		this.historico = historico;
+	public void addAcao(Acao acao) {
+		this.historico.add(acao);
 	}
 	public int getId() {
 		return id;
@@ -74,6 +75,9 @@ public class Conta {
 	@Override
 	public String toString() {
 		return "ID: "+ id + " Num: " + conta;
+	}
+	public String toHistorico (){
+		return "ID: "+id+" Num: "+conta+" Saldo: "+saldo;
 	}
 	
 }

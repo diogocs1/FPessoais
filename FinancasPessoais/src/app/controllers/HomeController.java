@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import model.Conta;
 import app.Main;
+import app.jdbc.DadosConta;
 import app.logica.Cadastro;
+import app.model.Conta;
 import app.observableModel.ContaModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,13 +22,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Dialogs.DialogResponse;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jdbc.DadosConta;
 
 public class HomeController implements Initializable{
 	//Instância Principal
@@ -51,6 +53,16 @@ public class HomeController implements Initializable{
 		private Button removerConta;
 		// Janela de cadastro de contas
 		private Stage novaJanelaConta;
+		
+		//Detalhes de contas
+		@FXML
+		private Label titularDt;
+		@FXML
+		private Label numeroDt;
+		@FXML
+		private Label bancoDt;
+		@FXML
+		private Label saldoDt;
 
 
 	@Override
@@ -116,10 +128,26 @@ public class HomeController implements Initializable{
 					}
 				}
 			});
+			tabelaContas.setOnMouseClicked(new EventHandler<MouseEvent>(){
+				@Override
+				public void handle(MouseEvent arg0) {
+					try{
+						Conta contaAtual = tabelaContas.getSelectionModel().getSelectedItem().getContaObj();
+						detalhesConta(contaAtual);
+					}catch (NullPointerException e){
+						e.getMessage();
+					}
+				}
+				
+			});
 	}
-	
-	
-	
+	public void detalhesConta (Conta conta){
+		titularDt.setText(conta.getPessoa().getNome());
+		numeroDt.setText(conta.getConta());
+		bancoDt.setText(conta.getBanco());
+		saldoDt.setText(String.valueOf(conta.getSaldo()));
+	}
+
 	public void atualizaTabela (){
 		try {
 			ArrayList<Conta> contas = new DadosConta().getContas();
@@ -139,6 +167,9 @@ public class HomeController implements Initializable{
 			Dialogs.showErrorDialog(null, "Problemas no banco de dados! \n \n" + e.getMessage());
 		}
 	}
+	/*************************************
+	 * Cadastro de contas - FIM
+	 *************************************/
 	
 	public Main getMain() {
 		return main;
