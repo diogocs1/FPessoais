@@ -1,6 +1,5 @@
 package app.jdbc;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class DadosConta extends BD{
 		
 		stmt.execute();
 		// Adiciona a ação ao histórico
-		addHistorico(novaConta.getHistorico().get(0));
+//		addHistorico(novaConta.getHistorico().get(0), novaConta);
 		
 		stmt.close();
 	}
@@ -53,6 +52,7 @@ public class DadosConta extends BD{
 									rs.getString("tipo"),
 									rs.getDouble("saldo")
 									);
+			conta.setHistorico(getHistorico(conta));
 			contas.add(conta);
 		}
 		return contas;
@@ -69,7 +69,8 @@ public class DadosConta extends BD{
 		// Adiciona a última ação ao histórico
 		int posHist = novaConta.getHistorico().size() - 1;
 		addHistorico(
-				novaConta.getHistorico().get(posHist)
+				novaConta.getHistorico().get(posHist),
+				novaConta
 				);
 		stmt.close();
 	}
@@ -85,11 +86,29 @@ public class DadosConta extends BD{
 		stmt.close();
 		stmt2.close();
 	}
-	public void addHistorico (Acao acao) throws SQLException{
-		PreparedStatement stmt = conn.prepareStatement("INSERT INTO historico (data,descricao) VALUES (?,?)");
-		stmt.setDate(1, (Date) acao.getData());
+	public void addHistorico (Acao acao, Conta conta) throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("INSERT INTO historico (data,descricao,conta_idconta) VALUES (?,?,?)");
+		stmt.setString(1,acao.getData());
 		stmt.setString(2, acao.getDescricao());
+		stmt.setInt(3, conta.getId());
 		stmt.execute();
 		stmt.close();
+	}
+	public ArrayList<Acao> getHistorico (Conta conta) throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM historico WHERE conta_idconta = ?");
+		stmt.setInt(1, conta.getId());
+		ResultSet rs = stmt.executeQuery();
+		
+		ArrayList<Acao> acoes = new ArrayList<Acao>();
+		
+		while (rs.next()){
+			Acao acao = new Acao(
+								rs.getInt("idhistorico"),
+								rs.getString("data"),
+								rs.getString("descricao")
+								);
+			acoes.add(acao);
+		}
+		return acoes;
 	}
 }

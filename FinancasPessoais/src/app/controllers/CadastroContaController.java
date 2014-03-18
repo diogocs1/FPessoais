@@ -26,8 +26,6 @@ public class CadastroContaController implements Initializable{
 	private Main main;
 	
 	@FXML
-	private TextField titular;
-	@FXML
 	private ChoiceBox<String> banco;
 	@FXML
 	private ChoiceBox<String> tipo;
@@ -67,10 +65,10 @@ public class CadastroContaController implements Initializable{
 					}else{
 						Cadastro.cadastraConta(main.getUser(), banco.getValue(), numero.getText(), tipo.getValue(), Normaliza.normalizaValor(saldo.getText()));
 					}
-					main.getControllerHome().atualizaTabela();
+					main.getControllerHome().atualizaTabelaContas();
 					main.getControllerHome().getNovaJanelaConta().close();
 				} catch (Exception e) {
-					Dialogs.showErrorDialog(null, e.getMessage());
+					Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());
 				}
 				
 			}
@@ -86,7 +84,6 @@ public class CadastroContaController implements Initializable{
 	}
 	public void editaConta (Conta conta){
 		setEditaConta(conta);
-		this.titular.setText(conta.getPessoa().getNome());
 		this.banco.setValue(conta.getBanco());
 		this.tipo.setValue(conta.getTipo());
 		this.numero.setText(conta.getConta());

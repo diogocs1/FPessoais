@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import app.Main;
 import app.jdbc.DadosConta;
 import app.logica.Cadastro;
+import app.model.Acao;
 import app.model.Conta;
 import app.observableModel.ContaModel;
+import app.observableModel.HistoricoModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,12 +65,22 @@ public class HomeController implements Initializable{
 		private Label bancoDt;
 		@FXML
 		private Label saldoDt;
+		
+		// Tabela de Histórico
+		@FXML
+		private TableView<HistoricoModel> tabelaHistorico;
+		@FXML
+		private TableColumn<HistoricoModel, String> hDataCol;
+		@FXML
+		private TableColumn<HistoricoModel, String> hDescricaoCol;
+		private ObservableList<HistoricoModel> listaAcoes;
+		
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Coloca os itens na tabela
-		atualizaTabela();
+		atualizaTabelaContas();
 		
 		/*************************************
 		 * Cadastro de contas
@@ -124,7 +136,7 @@ public class HomeController implements Initializable{
 						Cadastro.removeConta(
 								tabelaContas.getSelectionModel().getSelectedItem().getContaObj()
 						);
-						atualizaTabela();
+						atualizaTabelaContas();
 					}
 				}
 			});
@@ -132,8 +144,11 @@ public class HomeController implements Initializable{
 				@Override
 				public void handle(MouseEvent arg0) {
 					try{
+						// Obtém a conta selecionada
 						Conta contaAtual = tabelaContas.getSelectionModel().getSelectedItem().getContaObj();
+						// Mostra os detalhes e atualiza a tabela do Histórico
 						detalhesConta(contaAtual);
+						atualizaTabelaHist(contaAtual);
 					}catch (NullPointerException e){
 						e.getMessage();
 					}
@@ -148,10 +163,12 @@ public class HomeController implements Initializable{
 		saldoDt.setText(String.valueOf(conta.getSaldo()));
 	}
 
-	public void atualizaTabela (){
+	public void atualizaTabelaContas (){
 		try {
 			ArrayList<Conta> contas = new DadosConta().getContas();
+			// Inicializa o atributo ObservableList
 			listaContas = FXCollections.observableArrayList();
+			// Define os valores para cada coluna
 			contaCol.setCellValueFactory(
 					new PropertyValueFactory<ContaModel, String>("conta")
 					);
@@ -165,6 +182,25 @@ public class HomeController implements Initializable{
 			}
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Problemas no banco de dados! \n \n" + e.getMessage());
+		}
+	}
+	public void atualizaTabelaHist (Conta conta) {
+		System.out.println("tabela histórico");
+		// Obtém o histórico de ações
+		ArrayList<Acao> acoes = conta.getHistorico();
+		System.out.println(acoes.get(0).getDescricao());
+		// Inicializa o ObservableList
+		listaAcoes = FXCollections.observableArrayList();
+		hDataCol.setCellValueFactory(
+				new PropertyValueFactory<HistoricoModel, String>("data")
+				);
+		hDescricaoCol.setCellValueFactory(
+				new PropertyValueFactory<HistoricoModel, String>("descricao")
+				);
+		tabelaHistorico.setItems(listaAcoes);
+		
+		for (Acao acao: acoes){
+			listaAcoes.add(new HistoricoModel(acao));
 		}
 	}
 	/*************************************

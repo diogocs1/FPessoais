@@ -2,16 +2,22 @@ package app.model;
 
 import java.util.Date;
 
+
 public class Acao {
 	private int id;
-	private Date data;
+	private String data;
 	private String descricao;
 	
 	public Acao(Date data, String descricao) {
 		setData(data);
 		setDescricao(descricao);
 	}
-	public Acao(int id, Date dara, String descricao) {
+	public Acao(int id, Date data, String descricao) {
+		setId(id);
+		setData(data);
+		setDescricao(descricao);
+	}
+	public Acao(int id, String data, String descricao) {
 		setId(id);
 		setData(data);
 		setDescricao(descricao);
@@ -23,10 +29,13 @@ public class Acao {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 	public void setData(Date data) {
+		this.data = data.toString();
+	}
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getDescricao() {

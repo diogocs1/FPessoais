@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Conta {
 	private int id;
-	private ArrayList<Acao> historico;
+	private ArrayList<Acao> historico = new ArrayList<Acao>();
 	private Usuario pessoa;
 	private String tipo;
 	private String conta;
@@ -65,6 +65,9 @@ public class Conta {
 	}
 	public void addAcao(Acao acao) {
 		this.historico.add(acao);
+	}
+	public void setHistorico (ArrayList<Acao> hist){
+		this.historico = hist;
 	}
 	public int getId() {
 		return id;
