@@ -42,9 +42,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 CREATE TABLE IF NOT EXISTS `historico` (
   `idhistorico` INTEGER PRIMARY KEY,
-  `titulo` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(45) NOT NULL,
-  `data` DATE NOT NULL,
+  `data` VARCHAR(45) NOT NULL,
   `conta_idconta` INTEGER(11) NOT NULL,
   CONSTRAINT `fk_historico_conta`
     FOREIGN KEY (`conta_idconta`) REFERENCES `conta`(`idconta`));
