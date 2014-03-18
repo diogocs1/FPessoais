@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import app.Main;
 import app.jdbc.DadosConta;
 import app.logica.Cadastro;
+import app.logica.Calcula;
+import app.logica.Normaliza;
 import app.model.Acao;
 import app.model.Conta;
 import app.observableModel.ContaModel;
@@ -27,9 +29,11 @@ import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -40,6 +44,11 @@ public class HomeController implements Initializable{
 	/*************************************
 	 * Cadastro de contas
 	 *************************************/
+		// Painel superior esquerdo:
+		@FXML
+		private Label saldoTotal;
+		
+		// Tab principal de contas
 		@FXML
 		private TableView<ContaModel> tabelaContas;
 		@FXML
@@ -75,16 +84,28 @@ public class HomeController implements Initializable{
 		private TableColumn<HistoricoModel, String> hDescricaoCol;
 		private ObservableList<HistoricoModel> listaAcoes;
 		
-
+		//Opções de conta
+		@FXML
+		private Button btDepositar;
+		@FXML
+		private Button btSacar;
+		@FXML
+		private Pane entraValor;
+		@FXML
+		private TextField tfValor;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		atualizaSaldoTotal();
 		//Coloca os itens na tabela
 		atualizaTabelaContas();
 		
 		/*************************************
 		 * Cadastro de contas
 		 *************************************/
+		//Torna o campo valor invisível
+		entraValor.setVisible(false);
+		
 			novaConta.setOnAction(new EventHandler<ActionEvent>(){
 				public void handle (ActionEvent evt){
 					try {
@@ -136,10 +157,14 @@ public class HomeController implements Initializable{
 						Cadastro.removeConta(
 								tabelaContas.getSelectionModel().getSelectedItem().getContaObj()
 						);
+						tabelaContas.getSelectionModel().getSelectedItem().setContaObj(null);
 						atualizaTabelaContas();
+						atualizaSaldoTotal();
+						tabelaHistorico.setItems(null);
 					}
 				}
 			});
+			// Identifica os cliques na tabela
 			tabelaContas.setOnMouseClicked(new EventHandler<MouseEvent>(){
 				@Override
 				public void handle(MouseEvent arg0) {
@@ -153,16 +178,71 @@ public class HomeController implements Initializable{
 						e.getMessage();
 					}
 				}
-				
+			});
+			// Botão depositar
+			btDepositar.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle(ActionEvent arg0) {
+					if ( !(entraValor.isVisible() ) ){
+						entraValor.setVisible(true);
+						tfValor.setText("");
+					}else{
+						try {
+							Double valor = Normaliza.normalizaValor(tfValor.getText());
+							Conta contaAtual = tabelaContas.getSelectionModel().getSelectedItem().getContaObj();
+							atualizaTabelaContas();
+							Cadastro.depositaValor(contaAtual, valor);
+							entraValor.setVisible(false);
+							atualizaSaldoTotal();
+						} catch (NullPointerException e) {
+							Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma conta e preencha o valor");
+							entraValor.setVisible(false);
+						} catch (SQLException e) {
+							Dialogs.showErrorDialog(main.getPrimaryStage(), "Problema no banco de dados! \n \n"+"Erro: "+e.getSQLState());
+						}
+						atualizaTabelaContas();
+						entraValor.setVisible(false);
+					}
+				}
+			});
+			// Botão sacar
+			btSacar.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle(ActionEvent arg0) {
+					if ( !(entraValor.isVisible() ) ){
+						entraValor.setVisible(true);
+						tfValor.setText("");
+					}else{
+						try {
+							Double valor = Normaliza.normalizaValor(tfValor.getText());
+							Conta contaAtual = tabelaContas.getSelectionModel().getSelectedItem().getContaObj();
+							Cadastro.sacaValor(contaAtual, valor);
+							atualizaTabelaContas();
+							entraValor.setVisible(false);
+							atualizaSaldoTotal();
+						} catch (SQLException e) {
+							Dialogs.showErrorDialog(main.getPrimaryStage(), "Problema no banco de dados! \n \n" + e.getSQLState());
+						} catch (IllegalArgumentException e){
+							Dialogs.showErrorDialog(main.getPrimaryStage(), e.getMessage());
+						} catch (NullPointerException e){
+							Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma conta e preencha o valor");
+							entraValor.setVisible(false);
+						}
+					}
+				}
 			});
 	}
+	/*
+	 * Initialize - FIM
+	 */
+	
+	
 	public void detalhesConta (Conta conta){
 		titularDt.setText(conta.getPessoa().getNome());
 		numeroDt.setText(conta.getConta());
 		bancoDt.setText(conta.getBanco());
 		saldoDt.setText(String.valueOf(conta.getSaldo()));
 	}
-
 	public void atualizaTabelaContas (){
 		try {
 			ArrayList<Conta> contas = new DadosConta().getContas();
@@ -175,20 +255,21 @@ public class HomeController implements Initializable{
 			saldoCol.setCellValueFactory(
 					new PropertyValueFactory<ContaModel, Double>("saldo")
 					);
-			tabelaContas.setItems(listaContas);
-				
 			for (Conta conta : contas) {
 				listaContas.add(new ContaModel(conta));
+			}
+			if (listaContas.isEmpty()){
+				tabelaContas.setItems(null);
+			}else{
+				tabelaContas.setItems(listaContas);
 			}
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Problemas no banco de dados! \n \n" + e.getMessage());
 		}
 	}
 	public void atualizaTabelaHist (Conta conta) {
-		System.out.println("tabela histórico");
 		// Obtém o histórico de ações
 		ArrayList<Acao> acoes = conta.getHistorico();
-		System.out.println(acoes.get(0).getDescricao());
 		// Inicializa o ObservableList
 		listaAcoes = FXCollections.observableArrayList();
 		hDataCol.setCellValueFactory(
@@ -202,6 +283,9 @@ public class HomeController implements Initializable{
 		for (Acao acao: acoes){
 			listaAcoes.add(new HistoricoModel(acao));
 		}
+	}
+	public void atualizaSaldoTotal (){
+		saldoTotal.setText(Calcula.somaSaldo());
 	}
 	/*************************************
 	 * Cadastro de contas - FIM

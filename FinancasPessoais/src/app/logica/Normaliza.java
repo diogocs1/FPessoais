@@ -8,7 +8,7 @@ public class Normaliza {
 		try {
 			return Double.parseDouble(dvalor);
 		}catch (NumberFormatException e){
-			Dialogs.showErrorDialog(null, "Digite apenas números no campo saldo! \n \n" + e.getMessage());
+			Dialogs.showErrorDialog(null, "Digite apenas números (com vírgula ou ponto) no campo saldo! \n \n" + "Erro: "+ e.getMessage());
 //			throw new Exception("Valor inválido!");
 		}
 		return 0.0;

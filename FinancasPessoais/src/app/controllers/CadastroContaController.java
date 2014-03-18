@@ -52,7 +52,7 @@ public class CadastroContaController implements Initializable{
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Erro no Banco de dados \n \n" + e.getMessage());
 		}
-		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Conta FácilS"));
+		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Conta Fácil","Conta Salário"));
 		// FIM
 
 		// Ações dos botões
@@ -61,11 +61,25 @@ public class CadastroContaController implements Initializable{
 			public void handle (ActionEvent evt) {
 				try {
 					if (edita){
-						Cadastro.editaConta(editaConta, main.getUser(), banco.getValue(), numero.getText(), tipo.getValue(), Normaliza.normalizaValor(saldo.getText()));
+						Cadastro.editaConta(
+								editaConta, 
+								main.getUser(), 
+								banco.getValue(), 
+								numero.getText(), 
+								tipo.getValue(), 
+								Normaliza.normalizaValor(saldo.getText())
+								);
 					}else{
-						Cadastro.cadastraConta(main.getUser(), banco.getValue(), numero.getText(), tipo.getValue(), Normaliza.normalizaValor(saldo.getText()));
+						Cadastro.cadastraConta(
+								main.getUser(), 
+								banco.getValue(), 
+								numero.getText(), 
+								tipo.getValue(), 
+								Normaliza.normalizaValor(saldo.getText())
+								);
 					}
 					main.getControllerHome().atualizaTabelaContas();
+					main.getControllerHome().atualizaSaldoTotal();
 					main.getControllerHome().getNovaJanelaConta().close();
 				} catch (Exception e) {
 					Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());

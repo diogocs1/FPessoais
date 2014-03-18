@@ -29,7 +29,6 @@ public class Cadastro {
 						Dialogs.showInformationDialog(null, "Usuário Cadastrado!");
 					} catch (SQLException e){
 						Dialogs.showErrorDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
-						System.out.println(e.getMessage());
 					}
 				}
 			}
@@ -70,5 +69,15 @@ public class Cadastro {
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
 		}
+	}
+	public static void depositaValor (Conta contaAtual, double valor) throws SQLException, NullPointerException{
+		contaAtual.depositar(valor);
+		contaAtual.addAcao(new Acao(new Date(), "Valor depositado: "+valor));
+		new DadosConta().editaConta(contaAtual, contaAtual);
+	}
+	public static void sacaValor (Conta contaAtual, double valor) throws SQLException, NullPointerException {
+		contaAtual.sacar(valor);
+		contaAtual.addAcao(new Acao(new Date(), "Valor sacado: "+valor));
+		new DadosConta().editaConta(contaAtual, contaAtual);
 	}
 }

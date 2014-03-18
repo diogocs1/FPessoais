@@ -15,11 +15,11 @@ public class HistoricoModel {
 	}
 
 	
-	public SimpleStringProperty getData() {
-		return data;
+	public String getData() {
+		return data.get();
 	}
-	public SimpleStringProperty getDescricao() {
-		return descricao;
+	public String getDescricao() {
+		return descricao.get();
 	}
 	public Acao getAcao() {
 		return acao;

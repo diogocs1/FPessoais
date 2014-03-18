@@ -34,9 +34,23 @@ public class DadosConta extends BD{
 		
 		stmt.execute();
 		// Adiciona a ação ao histórico
-//		addHistorico(novaConta.getHistorico().get(0), novaConta);
+		novaConta = getIdConta(novaConta);
+		addHistorico(novaConta.getHistorico().get(0), novaConta);
 		
 		stmt.close();
+	}
+	public Conta getIdConta (Conta novaConta) throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement("SELECT idconta FROM conta WHERE banco = ? AND num = ? AND tipo = ?");
+		stmt.setString(1, novaConta.getBanco());
+		stmt.setString(2, novaConta.getConta());
+		stmt.setString(3, novaConta.getTipo());
+		
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()){
+			novaConta.setId(rs.getInt("idconta"));
+		}
+		stmt.close();
+		return novaConta;
 	}
 	public ArrayList<Conta> getContas () throws SQLException {
 		String sql = "SELECT * FROM conta, usuario WHERE usuario_idusuario = idusuario;";
