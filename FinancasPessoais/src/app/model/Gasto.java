@@ -12,16 +12,14 @@ public class Gasto {
 	private String status;
 	private int prioridade;
 	private double valor;
-	private CreditCard cartao;
 
-	public Gasto (Conta conta, String titulo, String descricao, String vencimento, int prioridade, double valor){
+	public Gasto (String titulo, String descricao, String vencimento, int prioridade, double valor){
 		setPessoa(conta.getPessoa());
-		setConta(conta);
-		this.setTitulo(titulo);
-		this.setDescricao(descricao);
-		this.setVencimento(vencimento);
-		this.setPrioridade(prioridade);
-		this.setValor(valor);
+		setTitulo(titulo);
+		setDescricao(descricao);
+		setVencimento(vencimento);
+		setPrioridade(prioridade);
+		setValor(valor);
 	}
 
 	public int getId() {
@@ -75,14 +73,6 @@ public class Gasto {
 	}
 	public void erro (int id) {
 		JOptionPane.showMessageDialog(null, (id + ": Valor Inválido!"));
-	}
-
-	public CreditCard getCartao() {
-		return cartao;
-	}
-
-	public void setCartao(CreditCard cartao) {
-		this.cartao = cartao;
 	}
 
 	public String getStatus() {

@@ -29,7 +29,6 @@ public class Cadastro {
 						Dialogs.showInformationDialog(null, "Usuário Cadastrado!");
 					} catch (SQLException e){
 						Dialogs.showErrorDialog(null, "Erro no Banco de Dados. \n" + e.getMessage());
-						System.out.println(e.getMessage());
 					}
 				}
 			}

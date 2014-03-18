@@ -268,10 +268,8 @@ public class HomeController implements Initializable{
 		}
 	}
 	public void atualizaTabelaHist (Conta conta) {
-		System.out.println("tabela histórico");
 		// Obtém o histórico de ações
 		ArrayList<Acao> acoes = conta.getHistorico();
-		System.out.println(acoes.get(0).getDescricao());
 		// Inicializa o ObservableList
 		listaAcoes = FXCollections.observableArrayList();
 		hDataCol.setCellValueFactory(

@@ -407,21 +407,13 @@
                 <Label text="Descrição:" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="135.0" />
                 <Label text="Situação" AnchorPane.leftAnchor="388.0" AnchorPane.topAnchor="63.0" />
                 <TextArea editable="false" prefHeight="187.0" prefWidth="212.0" style="-fx-background-color: linear-gradient(to bottom, derive(grey,50%), derive(black,65%) 12%, derive(black,23%) 88%, derive(black,50%) 99%, -fx-box-border);;&#10;-fx-background-radius: 20;&#10;-fx-padding: 16;&#10;-fx-ttext-fill: white" wrapText="true" AnchorPane.leftAnchor="379.0" AnchorPane.topAnchor="161.0" />
-                <ChoiceBox prefWidth="212.0" AnchorPane.leftAnchor="379.0" AnchorPane.topAnchor="86.0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ChoiceBox>
                 <ToolBar orientation="HORIZONTAL" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="430.0">
                   <items>
                     <Button mnemonicParsing="false" text="Nova Despeza" />
                     <Button mnemonicParsing="false" style="" styleClass="botao-remover" text="Remover" />
                   </items>
                 </ToolBar>
+                <TextField layoutX="385.0" layoutY="82.0" prefWidth="200.0" />
               </children>
             </AnchorPane>
           </content>
