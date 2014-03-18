@@ -176,7 +176,7 @@ public class HomeController implements Initializable{
 					new PropertyValueFactory<ContaModel, Double>("saldo")
 					);
 			tabelaContas.setItems(listaContas);
-				
+			
 			for (Conta conta : contas) {
 				listaContas.add(new ContaModel(conta));
 			}
