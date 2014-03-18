@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import app.Main;
 import app.jdbc.DadosConta;
 import app.logica.Cadastro;
+import app.logica.Calcula;
 import app.logica.Normaliza;
 import app.model.Acao;
 import app.model.Conta;
@@ -43,6 +44,11 @@ public class HomeController implements Initializable{
 	/*************************************
 	 * Cadastro de contas
 	 *************************************/
+		// Painel superior esquerdo:
+		@FXML
+		private Label saldoTotal;
+		
+		// Tab principal de contas
 		@FXML
 		private TableView<ContaModel> tabelaContas;
 		@FXML
@@ -90,7 +96,7 @@ public class HomeController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		atualizaSaldoTotal();
 		//Coloca os itens na tabela
 		atualizaTabelaContas();
 		
@@ -153,6 +159,7 @@ public class HomeController implements Initializable{
 						);
 						tabelaContas.getSelectionModel().getSelectedItem().setContaObj(null);
 						atualizaTabelaContas();
+						atualizaSaldoTotal();
 						tabelaHistorico.setItems(null);
 					}
 				}
@@ -186,6 +193,7 @@ public class HomeController implements Initializable{
 							atualizaTabelaContas();
 							Cadastro.depositaValor(contaAtual, valor);
 							entraValor.setVisible(false);
+							atualizaSaldoTotal();
 						} catch (NullPointerException e) {
 							Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma conta e preencha o valor");
 							entraValor.setVisible(false);
@@ -211,6 +219,7 @@ public class HomeController implements Initializable{
 							Cadastro.sacaValor(contaAtual, valor);
 							atualizaTabelaContas();
 							entraValor.setVisible(false);
+							atualizaSaldoTotal();
 						} catch (SQLException e) {
 							Dialogs.showErrorDialog(main.getPrimaryStage(), "Problema no banco de dados! \n \n" + e.getSQLState());
 						} catch (IllegalArgumentException e){
@@ -276,6 +285,9 @@ public class HomeController implements Initializable{
 		for (Acao acao: acoes){
 			listaAcoes.add(new HistoricoModel(acao));
 		}
+	}
+	public void atualizaSaldoTotal (){
+		saldoTotal.setText(Calcula.somaSaldo());
 	}
 	/*************************************
 	 * Cadastro de contas - FIM

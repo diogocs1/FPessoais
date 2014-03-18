@@ -437,7 +437,7 @@
         </Label>
         <Label style="-fx-text-fill: black" text="Débitos totais" GridPane.columnIndex="0" GridPane.margin="$x4" GridPane.rowIndex="1" />
         <Label style="-fx-text-fill: black" text="Saldo previsto" GridPane.columnIndex="0" GridPane.margin="$x4" GridPane.rowIndex="2" />
-        <Label style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label fx:id="saldoTotal" style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>

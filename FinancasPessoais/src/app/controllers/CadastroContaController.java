@@ -2,14 +2,12 @@ package app.controllers;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import app.Main;
 import app.jdbc.DadosConta;
 import app.logica.Cadastro;
 import app.logica.Normaliza;
-import app.model.Acao;
 import app.model.Conta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,6 +79,7 @@ public class CadastroContaController implements Initializable{
 								);
 					}
 					main.getControllerHome().atualizaTabelaContas();
+					main.getControllerHome().atualizaSaldoTotal();
 					main.getControllerHome().getNovaJanelaConta().close();
 				} catch (Exception e) {
 					Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());
