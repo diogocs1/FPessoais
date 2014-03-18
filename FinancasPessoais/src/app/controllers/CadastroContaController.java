@@ -2,12 +2,14 @@ package app.controllers;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import app.Main;
 import app.jdbc.DadosConta;
 import app.logica.Cadastro;
 import app.logica.Normaliza;
+import app.model.Acao;
 import app.model.Conta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -52,7 +54,7 @@ public class CadastroContaController implements Initializable{
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Erro no Banco de dados \n \n" + e.getMessage());
 		}
-		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Conta FácilS"));
+		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Conta Fácil","Conta Salário"));
 		// FIM
 
 		// Ações dos botões
@@ -61,9 +63,22 @@ public class CadastroContaController implements Initializable{
 			public void handle (ActionEvent evt) {
 				try {
 					if (edita){
-						Cadastro.editaConta(editaConta, main.getUser(), banco.getValue(), numero.getText(), tipo.getValue(), Normaliza.normalizaValor(saldo.getText()));
+						Cadastro.editaConta(
+								editaConta, 
+								main.getUser(), 
+								banco.getValue(), 
+								numero.getText(), 
+								tipo.getValue(), 
+								Normaliza.normalizaValor(saldo.getText())
+								);
 					}else{
-						Cadastro.cadastraConta(main.getUser(), banco.getValue(), numero.getText(), tipo.getValue(), Normaliza.normalizaValor(saldo.getText()));
+						Cadastro.cadastraConta(
+								main.getUser(), 
+								banco.getValue(), 
+								numero.getText(), 
+								tipo.getValue(), 
+								Normaliza.normalizaValor(saldo.getText())
+								);
 					}
 					main.getControllerHome().atualizaTabelaContas();
 					main.getControllerHome().getNovaJanelaConta().close();

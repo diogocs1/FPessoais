@@ -54,6 +54,13 @@ public class Conta {
 	public void depositar(double saldo) {
 		this.saldo += saldo;
 	}
+	public void sacar (double valor) throws IllegalArgumentException{
+		if (valor <= saldo){
+			this.saldo -= valor;
+		}else{
+			throw new IllegalArgumentException("Valor inválido!");
+		}
+	}
 	public Usuario getPessoa() {
 		return pessoa;
 	}

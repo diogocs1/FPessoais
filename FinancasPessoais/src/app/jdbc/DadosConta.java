@@ -49,7 +49,6 @@ public class DadosConta extends BD{
 		if (rs.next()){
 			novaConta.setId(rs.getInt("idconta"));
 		}
-		System.out.println(novaConta.getId());
 		stmt.close();
 		return novaConta;
 	}

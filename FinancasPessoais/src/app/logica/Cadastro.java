@@ -71,4 +71,14 @@ public class Cadastro {
 			Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
 		}
 	}
+	public static void depositaValor (Conta contaAtual, double valor) throws SQLException, NullPointerException{
+		contaAtual.depositar(valor);
+		contaAtual.addAcao(new Acao(new Date(), "Valor depositado: "+valor));
+		new DadosConta().editaConta(contaAtual, contaAtual);
+	}
+	public static void sacaValor (Conta contaAtual, double valor) throws SQLException, NullPointerException {
+		contaAtual.sacar(valor);
+		contaAtual.addAcao(new Acao(new Date(), "Valor sacado: "+valor));
+		new DadosConta().editaConta(contaAtual, contaAtual);
+	}
 }

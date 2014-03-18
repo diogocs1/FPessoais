@@ -32,8 +32,9 @@ public class Acao {
 	public String getData() {
 		return data;
 	}
+	@SuppressWarnings("deprecation")
 	public void setData(Date data) {
-		this.data = data.toString();
+		this.data = data.toGMTString();
 	}
 	public void setData(String data) {
 		this.data = data;
@@ -43,7 +44,5 @@ public class Acao {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-	
-	
+	}	
 }
