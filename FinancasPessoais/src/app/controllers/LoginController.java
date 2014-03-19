@@ -68,8 +68,8 @@ public class LoginController{
 					Usuario user = new DadosLogin().getUsuario(txUsuario.getText());
 					// Verifica se o usuário digitou a senha correta, à partir do método que compara o valor dos campos com o valor do atributo do objeto pesquisado
 					if (Verifica.verificaUsuario (user, txUsuario.getText(), txSenha.getText())){
-						main.inicio();
 						main.setUser(user);
+						main.inicio();
 					}
 				} catch (SQLException e) {
 					Dialogs.showErrorDialog(null, "Problema no Banco de dados:\n \n" + e.getMessage());

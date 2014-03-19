@@ -22,6 +22,5 @@ public class DadosUsuario extends BD{
 		// Executa e fecha o statement
 		st.execute();
 		st.close();
-		conn.close();
 	}
 }

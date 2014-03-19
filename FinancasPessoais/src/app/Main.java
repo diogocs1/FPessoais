@@ -101,9 +101,11 @@ public class Main extends Application {
 			if (home == null){
 				FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Home.fxml"));
 				home = (AnchorPane) loader.load();
-				// Somente descomentar após a implementação da classe HomeController
 				controllerHome = loader.getController();
 				controllerHome.setMain(this);
+				//Coloca os itens na tabela
+				controllerHome.atualizaTabelaDespesas();
+				controllerHome.atualizaTabelaContas();
 			}
 			root.setCenter(home);
 		}catch (Exception e){

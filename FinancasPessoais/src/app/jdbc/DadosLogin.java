@@ -15,7 +15,6 @@ public class DadosLogin extends BD{
 		st.setString(2, nome);
 		st.execute();
 		st.close();
-		conn.close();
 	}
 	public Usuario getUsuario (String nome) throws SQLException {
 		/**
@@ -40,7 +39,6 @@ public class DadosLogin extends BD{
 			rs.close();
 			st.close();
 		}
-		conn.close();
 		return user;
 	}
 }

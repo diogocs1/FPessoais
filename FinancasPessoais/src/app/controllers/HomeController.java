@@ -151,14 +151,11 @@ public class HomeController implements Initializable{
 		colunaValor.setCellValueFactory(
 				new PropertyValueFactory<DespesaModel, String>("valor")
 				);
-		//Coloca os itens na tabela
-		atualizaTabelaDespesas();
-		atualizaTabelaContas();
+
 		// Atualiza painel superior
 		atualizaSaldoTotal();
 		atualizaDebitoTotal();
 		atualizaSaldoPrevisto();
-
 		/*************************************
 		 * Cadastro de contas
 		 *************************************/
@@ -332,7 +329,6 @@ public class HomeController implements Initializable{
 						atualizaSaldoPrevisto();
 					}
 				}
-				
 			});
 	}
 	/*
@@ -403,7 +399,9 @@ public class HomeController implements Initializable{
 			ArrayList<Despesa> despesas = new DadosDespesa().getDespesas();
 			ObservableList<DespesaModel> listaDespesas = FXCollections.observableArrayList();
 			for (Despesa despesa:despesas){
-				listaDespesas.add(new DespesaModel(despesa));
+				if (despesa.getPessoa().getId() == main.getUser().getId()){
+					listaDespesas.add(new DespesaModel(despesa));
+				}
 			}
 			if (listaDespesas.isEmpty()){
 				tabelaDespesas.setItems(null);
