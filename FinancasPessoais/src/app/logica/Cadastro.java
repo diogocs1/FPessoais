@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import app.jdbc.DadosConta;
+import app.jdbc.DadosDespesa;
 import app.jdbc.DadosUsuario;
 import app.model.Acao;
 import app.model.Conta;
+import app.model.Despesa;
 import app.model.Usuario;
 import javafx.scene.control.Dialogs;
 
@@ -40,7 +42,7 @@ public class Cadastro {
 			try{
 				new DadosConta().criaConta(novaConta);
 			}catch (SQLException e){
-				Dialogs.showWarningDialog(null, "Problema no banco de dados.\n \n" + e.getMessage());
+				Dialogs.showErrorDialog(null, "Problema no banco de dados.\n \n" + e.getMessage());
 			}
 		}else{
 			Dialogs.showWarningDialog(null, "Preencha todos os campos!");
@@ -79,5 +81,17 @@ public class Cadastro {
 		contaAtual.sacar(valor);
 		contaAtual.addAcao(new Acao(new Date(), "Valor sacado: "+valor));
 		new DadosConta().editaConta(contaAtual, contaAtual);
+	}
+	public static void cadastraDespesa (Usuario usuario, String descricao, String vencimento, String prioridade,String status, double valor ){
+		if (Verifica.campoVazio(descricao) && Verifica.campoVazio(vencimento) && Verifica.campoVazio(prioridade) && Verifica.campoVazio(valor) && Verifica.campoVazio(status)){
+			try {
+				Despesa novaDespesa = new Despesa(usuario, descricao, vencimento, prioridade,status, valor);
+				new DadosDespesa().cadastraDespesa(novaDespesa);
+			} catch (SQLException e) {
+				Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
+			} catch (IllegalArgumentException e){
+				Dialogs.showErrorDialog(null, e.getMessage());
+			}
+		}
 	}
 }

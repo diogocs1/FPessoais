@@ -21,7 +21,7 @@ public class Verifica {
 				Dialogs.showWarningDialog(null, "Senha Inválida!");
 			}
 		}else{
-			Dialogs.showWarningDialog(null, "Usu�rio n�o est� cadastrado");
+			Dialogs.showWarningDialog(null, "Usuário não está cadastrado");
 		}
 		return vf;
 	}
@@ -69,8 +69,11 @@ public class Verifica {
 		 */
 		String[] nasc = nascimento.split("/");
 		boolean verifi = false;
-		if (nasc.length == 3) verifi = true ;
-		else JOptionPane.showMessageDialog(null, "Data inválida");
+		if (nasc.length == 3){
+			verifi = true ;
+		}else{
+			Dialogs.showErrorDialog(null, "Data inválida");
+		}
 		return verifi;
 	}
 	public static boolean campoVazio (String campo){

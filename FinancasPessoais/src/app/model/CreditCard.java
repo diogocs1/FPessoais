@@ -3,13 +3,13 @@ package app.model;
 import javax.swing.JOptionPane;
 
 public class CreditCard {
-	private Gasto gasto;
+	private Despesa gasto;
 	private String operadora;
 	private String numero;
 	private String vencimento;
 	private double limite;
 	
-	CreditCard (Gasto gasto, String op, String num, String venc, double limite){
+	CreditCard (Despesa gasto, String op, String num, String venc, double limite){
 		setGasto(gasto);
 		this.setOperadora(op);
 		this.setNumero(num);
@@ -54,11 +54,11 @@ public class CreditCard {
 		return ("Cartão: " + this.operadora + "\n" + "Número: " + this.numero);
 	}
 
-	public Gasto getGasto() {
+	public Despesa getGasto() {
 		return gasto;
 	}
 
-	public void setGasto(Gasto gasto) {
+	public void setGasto(Despesa gasto) {
 		this.gasto = gasto;
 	}
 }

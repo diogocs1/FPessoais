@@ -14,24 +14,22 @@ CREATE TABLE IF NOT EXISTS `ganhos` (
   `titulo` VARCHAR(45) NOT NULL,
   `valor` DOUBLE NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
-  `conta_idconta` INT(11) NOT NULL,
-  `conta_usuario_idusuario` INT(11) NOT NULL,
-  CONSTRAINT `fk_ganhos_conta1`
-    FOREIGN KEY (`conta_idconta` , `conta_usuario_idusuario`)
-    REFERENCES `conta` (`idconta` , `usuario_idusuario`));
+  `usuario_idusuario` INT(11) NOT NULL,
+  CONSTRAINT `fk_ganhos_usuario`
+    FOREIGN KEY (`usuario_idusuario`)
+    REFERENCES `usuario` (`usuario_idusuario`));
 
 CREATE TABLE IF NOT EXISTS `gastos` (
   `idgastos` INTEGER PRIMARY KEY,
-  `titulo` VARCHAR(45) NOT NULL,
   `descricao` TEXT NULL DEFAULT NULL,
   `vencimento` DATE NOT NULL,
   `prioridade` INT(11) NULL DEFAULT NULL,
   `valor` DOUBLE NULL DEFAULT NULL,
-  `conta_idconta` INT(11) NOT NULL,
-  `conta_usuario_idusuario` INT(11) NOT NULL,
-  CONSTRAINT `fk_gastos_conta1`
-    FOREIGN KEY (`conta_idconta` , `conta_usuario_idusuario`)
-    REFERENCES `conta` (`idconta` , `usuario_idusuario`));
+  `status` VARCHAR NOT NULL,
+  `usuario_idusuario` INT(11) NOT NULL,
+  CONSTRAINT `fk_gastos_usuario`
+    FOREIGN KEY (`usuario_idusuario`)
+    REFERENCES `usuario` (`usuario_idusuario`));
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idusuario` INTEGER PRIMARY KEY,
