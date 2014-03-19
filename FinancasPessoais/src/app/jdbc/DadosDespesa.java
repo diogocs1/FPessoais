@@ -1,11 +1,14 @@
 package app.jdbc;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import app.model.Despesa;
 
 public class DadosDespesa extends BD {
+	
 	public void cadastraDespesa (Despesa despesa) throws SQLException{
 		PreparedStatement stmt = conn.prepareStatement("INSERT INTO gastos (descricao,vencimento,prioridade,valor,status,usuario_idusuario) VALUES (?,?,?,?,?,?)");
 		stmt.setString(1, despesa.getDescricao());
@@ -17,5 +20,25 @@ public class DadosDespesa extends BD {
 		
 		stmt.execute();
 		stmt.close();
+	}
+	
+	public ArrayList<Despesa> getDespesas () throws SQLException{
+		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM gastos,usuario WHERE usuario_idusuario = idusuario");
+		ResultSet rs = stmt.executeQuery();
+		
+		ArrayList<Despesa> despesas = new ArrayList<Despesa>();
+		while (rs.next()){
+			Despesa despesa = new Despesa(
+					rs.getInt("idgastos"),
+					new DadosLogin().getUsuario(rs.getString("nome")),
+					rs.getString("descricao"),
+					rs.getString("vencimento"),
+					rs.getString("prioridade"),
+					rs.getString("status"),
+					rs.getDouble("valor")
+					);
+			despesas.add(despesa);
+		}
+		return despesas;
 	}
 }

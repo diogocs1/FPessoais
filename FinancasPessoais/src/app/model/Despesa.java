@@ -2,7 +2,6 @@ package app.model;
 
 public class Despesa {
 	private int id;
-	private Conta conta;
 	private Usuario pessoa;
 	private String descricao;
 	private String vencimento;
@@ -10,11 +9,17 @@ public class Despesa {
 	private String prioridade;
 	private double valor;
 
-	public Despesa() {
+	public Despesa (int id,Usuario pessoa, String descricao, String vencimento, String prioridade,String status, double valor) throws IllegalArgumentException{
+		setId(id);
+		setPessoa(pessoa);
+		setDescricao(descricao);
+		setVencimento(vencimento);
+		setPrioridade(prioridade);
+		setStatus(status);
+		setValor(valor);
 	}
 	public Despesa (Usuario pessoa, String descricao, String vencimento, String prioridade,String status, double valor) throws IllegalArgumentException{
 		setPessoa(pessoa);
-		setPessoa(conta.getPessoa());
 		setDescricao(descricao);
 		setVencimento(vencimento);
 		setPrioridade(prioridade);
@@ -58,6 +63,8 @@ public class Despesa {
 			}else{
 				throw new IllegalArgumentException("Data Inválida");
 			}
+		}else{
+			throw new IllegalArgumentException("Data Inválida!");
 		}
 	}
 
@@ -87,14 +94,6 @@ public class Despesa {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Conta getConta() {
-		return conta;
-	}
-
-	public void setConta(Conta conta) {
-		this.conta = conta;
 	}
 
 	public Usuario getPessoa() {

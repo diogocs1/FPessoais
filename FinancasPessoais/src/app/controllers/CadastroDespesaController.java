@@ -7,6 +7,7 @@ import app.Main;
 import app.logica.Cadastro;
 import app.logica.Normaliza;
 import app.logica.Verifica;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,12 +39,16 @@ public class CadastroDespesaController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// Valores dos ChoiceBox
+		prioridade.setItems(FXCollections.observableArrayList("Importante / Urgente","Importante / Não urgente","Não importante / Urgente", "Não importante / Não urgente"));
+		status.setItems(FXCollections.observableArrayList("Falta pagar","Pago"));
+		
 		//Ações dos botões
 		btSalvar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
 				if (Verifica.verificaNascimento(vencimento.getText())){
-					Cadastro.cadastraDespesa(
+					boolean cadastro = Cadastro.cadastraDespesa(
 							main.getUser(), 
 							descricao.getText(), 
 							vencimento.getText(),
@@ -51,7 +56,19 @@ public class CadastroDespesaController implements Initializable{
 							status.getValue(),
 							Normaliza.normalizaValor(valor.getText())
 							);
+					if (cadastro){
+						main.getControllerHome().atualizaTabelaDespesas();
+						main.getControllerHome().atualizaDebitoTotal();
+						main.getControllerHome().atualizaSaldoPrevisto();
+						main.getControllerHome().getNovaJanelaDespesas().close();
+					}
 				}
+			}
+		});
+		btCancelar.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				main.getControllerHome().getNovaJanelaDespesas().close();
 			}
 		});
 	}

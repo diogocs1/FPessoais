@@ -82,16 +82,18 @@ public class Cadastro {
 		contaAtual.addAcao(new Acao(new Date(), "Valor sacado: "+valor));
 		new DadosConta().editaConta(contaAtual, contaAtual);
 	}
-	public static void cadastraDespesa (Usuario usuario, String descricao, String vencimento, String prioridade,String status, double valor ){
+	public static boolean cadastraDespesa (Usuario usuario, String descricao, String vencimento, String prioridade,String status, double valor ){
 		if (Verifica.campoVazio(descricao) && Verifica.campoVazio(vencimento) && Verifica.campoVazio(prioridade) && Verifica.campoVazio(valor) && Verifica.campoVazio(status)){
 			try {
 				Despesa novaDespesa = new Despesa(usuario, descricao, vencimento, prioridade,status, valor);
 				new DadosDespesa().cadastraDespesa(novaDespesa);
+				return true;
 			} catch (SQLException e) {
 				Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
 			} catch (IllegalArgumentException e){
 				Dialogs.showErrorDialog(null, e.getMessage());
 			}
 		}
+		return false;
 	}
 }

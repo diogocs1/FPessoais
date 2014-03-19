@@ -43,7 +43,6 @@ public class CadastroContaController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
-		// Pega o usuário atual
 		// Preenche os ChoiceBox
 		try {
 			ObservableList<String> listaBancos = FXCollections.observableArrayList(new DadosConta().getBancos());
@@ -80,6 +79,7 @@ public class CadastroContaController implements Initializable{
 					}
 					main.getControllerHome().atualizaTabelaContas();
 					main.getControllerHome().atualizaSaldoTotal();
+					main.getControllerHome().atualizaSaldoPrevisto();
 					main.getControllerHome().getNovaJanelaConta().close();
 				} catch (Exception e) {
 					Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());

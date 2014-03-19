@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `gastos` (
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `idusuario` INTEGER PRIMARY KEY,
-  `nome` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(45) UNIQUE NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `nascimento` VARCHAR(45) NOT NULL
 );

@@ -8,12 +8,15 @@ import java.util.ResourceBundle;
 
 import app.Main;
 import app.jdbc.DadosConta;
+import app.jdbc.DadosDespesa;
 import app.logica.Cadastro;
 import app.logica.Calcula;
 import app.logica.Normaliza;
 import app.model.Acao;
 import app.model.Conta;
+import app.model.Despesa;
 import app.observableModel.ContaModel;
+import app.observableModel.DespesaModel;
 import app.observableModel.HistoricoModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,9 +47,13 @@ public class HomeController implements Initializable{
 	/*************************************
 	 * Cadastro de contas
 	 *************************************/
-		// Painel superior esquerdo:
+		// Painel superior direito:
 		@FXML
 		private Label saldoTotal;
+		@FXML
+		private Label debitoTotal;
+		@FXML
+		private Label saldoPrevisto;
 		
 		// Tab principal de contas
 		@FXML
@@ -93,13 +100,64 @@ public class HomeController implements Initializable{
 		private Pane entraValor;
 		@FXML
 		private TextField tfValor;
+		
+		/*************************************************
+		 * Tela de despesas
+		 *************************************************/
+		private Stage novaJanelaDespesas;
+		@FXML
+		private TableView<DespesaModel> tabelaDespesas;
+		@FXML
+		private TableColumn<DespesaModel, String> colunaDescricao;
+		@FXML
+		private TableColumn<DespesaModel, String> colunaVencimento;
+		@FXML
+		private TableColumn<DespesaModel, String> colunaValor;
+		// Botões
+		@FXML
+		private Button btNovaDespesa;
+		@FXML
+		private Button btRemoveDespesa;
+		@FXML
+		private Button btPagar;
+		
+	/*
+	 * Initialize - INICIO
+	 */
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// Define os valores para cada coluna de Contas
+		contaCol.setCellValueFactory(
+				new PropertyValueFactory<ContaModel, String>("conta")
+				);
+		saldoCol.setCellValueFactory(
+				new PropertyValueFactory<ContaModel, Double>("saldo")
+				);
+		// Colunas de histórico
+		hDataCol.setCellValueFactory(
+				new PropertyValueFactory<HistoricoModel, String>("data")
+				);
+		hDescricaoCol.setCellValueFactory(
+				new PropertyValueFactory<HistoricoModel, String>("descricao")
+				);
+		// Colunas de despesas
+		colunaDescricao.setCellValueFactory(
+				new PropertyValueFactory<DespesaModel, String>("descricao")
+				);
+		colunaVencimento.setCellValueFactory(
+				new PropertyValueFactory<DespesaModel, String>("vencimento")
+				);
+		colunaValor.setCellValueFactory(
+				new PropertyValueFactory<DespesaModel, String>("valor")
+				);
+		// Atualiza painel superior
 		atualizaSaldoTotal();
+		atualizaDebitoTotal();
+		atualizaSaldoPrevisto();
 		//Coloca os itens na tabela
 		atualizaTabelaContas();
-		
+		atualizaTabelaDespesas();
 		/*************************************
 		 * Cadastro de contas
 		 *************************************/
@@ -159,6 +217,7 @@ public class HomeController implements Initializable{
 						);
 						tabelaContas.getSelectionModel().getSelectedItem().setContaObj(null);
 						atualizaTabelaContas();
+						atualizaSaldoPrevisto();
 						atualizaSaldoTotal();
 						tabelaHistorico.setItems(null);
 					}
@@ -231,11 +290,41 @@ public class HomeController implements Initializable{
 					}
 				}
 			});
+			/*************************************
+			 * Cadastro de contas - FIM
+			 *************************************/
+			/*************************************
+			 * Cadastro de despesas - INICIO
+			 *************************************/
+			btNovaDespesa.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle(ActionEvent arg0) {
+					try {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CadastroDespesa.fxml"));
+						AnchorPane novaDespesa = (AnchorPane) loader.load();
+						CadastroDespesaController controller = loader.getController();
+						controller.setMain(main);
+						novaJanelaDespesas = new Stage();
+						Scene cena = new Scene(novaDespesa);
+						novaJanelaDespesas.setTitle("Nova Despesa");
+						novaJanelaDespesas.initModality(Modality.WINDOW_MODAL);
+						novaJanelaDespesas.initOwner(main.getPrimaryStage());
+						novaJanelaDespesas.setScene(cena);
+						novaJanelaDespesas.show();
+					} catch (IOException e) {
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Problemas ao abrir cadastro de despesas! \n \n" + e.getMessage());
+					}
+				}
+				
+			});
 	}
 	/*
 	 * Initialize - FIM
 	 */
-	
+	/*************************************
+	 * Cadastro de contas
+	 *  - Métodos de tabelas
+	 *************************************/
 	
 	public void detalhesConta (Conta conta){
 		titularDt.setText(conta.getPessoa().getNome());
@@ -248,15 +337,11 @@ public class HomeController implements Initializable{
 			ArrayList<Conta> contas = new DadosConta().getContas();
 			// Inicializa o atributo ObservableList
 			listaContas = FXCollections.observableArrayList();
-			// Define os valores para cada coluna
-			contaCol.setCellValueFactory(
-					new PropertyValueFactory<ContaModel, String>("conta")
-					);
-			saldoCol.setCellValueFactory(
-					new PropertyValueFactory<ContaModel, Double>("saldo")
-					);
+			// Lista apenas as contas do usuário atual
 			for (Conta conta : contas) {
-				listaContas.add(new ContaModel(conta));
+				if (conta.getPessoa().getId() == main.getUser().getId()){
+					listaContas.add(new ContaModel(conta));
+				}
 			}
 			if (listaContas.isEmpty()){
 				tabelaContas.setItems(null);
@@ -272,24 +357,45 @@ public class HomeController implements Initializable{
 		ArrayList<Acao> acoes = conta.getHistorico();
 		// Inicializa o ObservableList
 		listaAcoes = FXCollections.observableArrayList();
-		hDataCol.setCellValueFactory(
-				new PropertyValueFactory<HistoricoModel, String>("data")
-				);
-		hDescricaoCol.setCellValueFactory(
-				new PropertyValueFactory<HistoricoModel, String>("descricao")
-				);
 		tabelaHistorico.setItems(listaAcoes);
 		
 		for (Acao acao: acoes){
 			listaAcoes.add(new HistoricoModel(acao));
 		}
-	}
-	public void atualizaSaldoTotal (){
-		saldoTotal.setText(Calcula.somaSaldo());
+		
 	}
 	/*************************************
 	 * Cadastro de contas - FIM
 	 *************************************/
+	public void atualizaSaldoTotal (){
+		saldoTotal.setText(Calcula.somaSaldo());
+	}
+	public void atualizaDebitoTotal (){
+		debitoTotal.setText(Calcula.somaDespesas());
+	}
+	public void atualizaSaldoPrevisto (){
+		saldoPrevisto.setText(Calcula.saldoPrevisto());
+	}
+	/*************************************
+	 * Cadastro de Despesas - INICIO
+	 *************************************/
+	public void atualizaTabelaDespesas(){
+		try {
+			ArrayList<Despesa> despesas = new DadosDespesa().getDespesas();
+			ObservableList<DespesaModel> listaDespesas = FXCollections.observableArrayList();
+			for (Despesa despesa:despesas){
+				listaDespesas.add(new DespesaModel(despesa));
+			}
+			if (listaDespesas.isEmpty()){
+				tabelaDespesas.setItems(null);
+			}else{
+				tabelaDespesas.setItems(listaDespesas);
+			}
+		} catch (SQLException e) {
+			Dialogs.showErrorDialog(main.getPrimaryStage(), "Problema ao carregar a tabela de despesas! \n \n" + e.getSQLState());
+		}
+
+	}
 	
 	public Main getMain() {
 		return main;
@@ -299,5 +405,11 @@ public class HomeController implements Initializable{
 	}
 	public Stage getNovaJanelaConta (){
 		return this.novaJanelaConta;
+	}
+	public Stage getNovaJanelaDespesas() {
+		return novaJanelaDespesas;
+	}
+	public void setNovaJanelaDespesas(Stage novaJanelaDespesas) {
+		this.novaJanelaDespesas = novaJanelaDespesas;
 	}
 }
