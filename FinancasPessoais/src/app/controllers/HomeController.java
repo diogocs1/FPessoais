@@ -151,13 +151,14 @@ public class HomeController implements Initializable{
 		colunaValor.setCellValueFactory(
 				new PropertyValueFactory<DespesaModel, String>("valor")
 				);
+		//Coloca os itens na tabela
+		atualizaTabelaDespesas();
+		atualizaTabelaContas();
 		// Atualiza painel superior
 		atualizaSaldoTotal();
 		atualizaDebitoTotal();
 		atualizaSaldoPrevisto();
-		//Coloca os itens na tabela
-		atualizaTabelaContas();
-		atualizaTabelaDespesas();
+
 		/*************************************
 		 * Cadastro de contas
 		 *************************************/
@@ -315,6 +316,22 @@ public class HomeController implements Initializable{
 						Dialogs.showErrorDialog(main.getPrimaryStage(), "Problemas ao abrir cadastro de despesas! \n \n" + e.getMessage());
 					}
 				}
+			});
+			btRemoveDespesa.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle(ActionEvent arg0) {
+					DialogResponse i = Dialogs.showConfirmDialog(main.getPrimaryStage(), "Tem certeza de que deseja remover?");
+					if (i == DialogResponse.YES){
+						Cadastro.removeDespesa(
+								tabelaDespesas.getSelectionModel().getSelectedItem().getDespesa1()
+						);
+						tabelaDespesas.getSelectionModel().getSelectedItem().setDespesa1(null);
+						atualizaSaldoTotal();
+						atualizaTabelaDespesas();
+						atualizaDebitoTotal();
+						atualizaSaldoPrevisto();
+					}
+				}
 				
 			});
 	}
@@ -350,6 +367,8 @@ public class HomeController implements Initializable{
 			}
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Problemas no banco de dados! \n \n" + e.getMessage());
+		} catch (NullPointerException e){
+			e.printStackTrace();
 		}
 	}
 	public void atualizaTabelaHist (Conta conta) {

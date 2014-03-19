@@ -20,6 +20,7 @@ public class DadosDespesa extends BD {
 		
 		stmt.execute();
 		stmt.close();
+		conn.close();
 	}
 	
 	public ArrayList<Despesa> getDespesas () throws SQLException{
@@ -39,6 +40,18 @@ public class DadosDespesa extends BD {
 					);
 			despesas.add(despesa);
 		}
+		stmt.close();
+		rs.close();
+		conn.close();
 		return despesas;
+	}
+
+	public void removeDespesa(Despesa despesa) throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement("DELETE FROM gastos WHERE idgasto = ?");
+		stmt.setInt(1, despesa.getId());
+		
+		stmt.execute();
+		stmt.close();
+		conn.close();
 	}
 }

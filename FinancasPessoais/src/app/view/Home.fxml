@@ -427,8 +427,8 @@
         <Label style="-fx-text-fill: black" text="Débitos totais" GridPane.columnIndex="0" GridPane.margin="$x4" GridPane.rowIndex="1" />
         <Label style="-fx-text-fill: black" text="Saldo previsto" GridPane.columnIndex="0" GridPane.margin="$x4" GridPane.rowIndex="2" />
         <Label fx:id="saldoTotal" style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <Label style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label fx:id="debitoTotal" style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label fx:id="saldoPrevisto" style="-fx-text-fill: black" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="147.0" />

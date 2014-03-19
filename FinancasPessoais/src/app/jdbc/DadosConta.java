@@ -20,6 +20,7 @@ public class DadosConta extends BD{
 		}
 		rs.close();
 		st.close();
+		conn.close();
 		return bancos;
 	}
 	public void criaConta (Conta novaConta) throws SQLException {
@@ -38,6 +39,7 @@ public class DadosConta extends BD{
 		addHistorico(novaConta.getHistorico().get(0), novaConta);
 		
 		stmt.close();
+		conn.close();
 	}
 	public Conta getIdConta (Conta novaConta) throws SQLException {
 		PreparedStatement stmt = conn.prepareStatement("SELECT idconta FROM conta WHERE banco = ? AND num = ? AND tipo = ?");
@@ -50,6 +52,8 @@ public class DadosConta extends BD{
 			novaConta.setId(rs.getInt("idconta"));
 		}
 		stmt.close();
+		rs.close();
+		conn.close();
 		return novaConta;
 	}
 	public ArrayList<Conta> getContas () throws SQLException {
@@ -69,6 +73,9 @@ public class DadosConta extends BD{
 			conta.setHistorico(getHistorico(conta));
 			contas.add(conta);
 		}
+		stmt.close();
+		rs.close();
+		conn.close();
 		return contas;
 	}
 	public void editaConta (Conta antigaConta, Conta novaConta) throws SQLException {
@@ -80,13 +87,14 @@ public class DadosConta extends BD{
 		stmt.setInt(5, antigaConta.getId());
 		
 		stmt.execute();
-		// Adiciona a última ação ao histórico
-		int posHist = novaConta.getHistorico().size() - 1;
-		addHistorico(
-				novaConta.getHistorico().get(posHist),
-				novaConta
-				);
+//		// Adiciona a última ação ao histórico
+//		int posHist = novaConta.getHistorico().size() - 1;
+//		addHistorico(
+//				novaConta.getHistorico().get(posHist),
+//				novaConta
+//				);
 		stmt.close();
+		conn.close();
 	}
 	public void removeConta (Conta conta) throws SQLException {
 		PreparedStatement stmt = conn.prepareStatement("DELETE FROM conta WHERE idconta = ?");
@@ -99,6 +107,7 @@ public class DadosConta extends BD{
 		stmt2.execute();
 		stmt.close();
 		stmt2.close();
+		conn.close();
 	}
 	public void addHistorico (Acao acao, Conta conta) throws SQLException{
 		PreparedStatement stmt = conn.prepareStatement("INSERT INTO historico (data,descricao,conta_idconta) VALUES (?,?,?)");
@@ -107,6 +116,7 @@ public class DadosConta extends BD{
 		stmt.setInt(3, conta.getId());
 		stmt.execute();
 		stmt.close();
+		conn.close();
 	}
 	public ArrayList<Acao> getHistorico (Conta conta) throws SQLException {
 		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM historico WHERE conta_idconta = ?");
@@ -123,6 +133,9 @@ public class DadosConta extends BD{
 								);
 			acoes.add(acao);
 		}
+		stmt.close();
+		rs.close();
+		conn.close();
 		return acoes;
 	}
 }

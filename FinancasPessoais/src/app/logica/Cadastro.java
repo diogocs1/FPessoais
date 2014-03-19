@@ -96,4 +96,12 @@ public class Cadastro {
 		}
 		return false;
 	}
+	public static void removeDespesa(Despesa despesa) {
+		try {
+			new DadosDespesa().removeDespesa(despesa);
+			Dialogs.showInformationDialog(null, "Conta Removida!");
+		} catch (SQLException e) {
+			Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
+		} 
+	}
 }
