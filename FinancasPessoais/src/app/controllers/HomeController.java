@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -104,7 +105,10 @@ public class HomeController implements Initializable{
 		/*************************************************
 		 * Tela de despesas
 		 *************************************************/
+		private ObservableList<DespesaModel> listaDespesas;
 		private Stage novaJanelaDespesas;
+		private Stage novaJanelaPagto;
+
 		@FXML
 		private TableView<DespesaModel> tabelaDespesas;
 		@FXML
@@ -120,7 +124,20 @@ public class HomeController implements Initializable{
 		private Button btRemoveDespesa;
 		@FXML
 		private Button btPagar;
+		@FXML
+		private Button editaDespesa;
 		
+		/*************************************************
+		 * Tela Início
+		 *************************************************/
+		@FXML
+		private ListView<String> l1;
+		@FXML
+		private ListView<String> l2;
+		@FXML
+		private ListView<String> l3;
+		@FXML
+		private ListView<String> l4;
 	/*
 	 * Initialize - INICIO
 	 */
@@ -151,7 +168,6 @@ public class HomeController implements Initializable{
 		colunaValor.setCellValueFactory(
 				new PropertyValueFactory<DespesaModel, String>("valor")
 				);
-
 		// Atualiza painel superior
 		atualizaSaldoTotal();
 		atualizaDebitoTotal();
@@ -200,7 +216,9 @@ public class HomeController implements Initializable{
 						novaJanelaConta.setScene(cena);
 						novaJanelaConta.show();
 					} catch (IOException e) {
-						Dialogs.showErrorDialog(null, "Não foi possível editar esta conta! \n \n" + e.getMessage());
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Não foi possível editar esta conta! \n \n" + e.getMessage());
+					} catch (NullPointerException e){
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma conta para editar!");
 					}
 				}
 			});
@@ -208,16 +226,19 @@ public class HomeController implements Initializable{
 			removerConta.setOnAction(new EventHandler<ActionEvent>(){
 				@Override
 				public void handle (ActionEvent evt){
-					DialogResponse i = Dialogs.showConfirmDialog(main.getPrimaryStage(), "Tem certeza de que deseja remover?");
-					if (i == DialogResponse.YES){
-						Cadastro.removeConta(
-								tabelaContas.getSelectionModel().getSelectedItem().getContaObj()
-						);
-						tabelaContas.getSelectionModel().getSelectedItem().setContaObj(null);
-						atualizaTabelaContas();
-						atualizaSaldoPrevisto();
-						atualizaSaldoTotal();
-						tabelaHistorico.setItems(null);
+					try{
+						Conta conta = tabelaContas.getSelectionModel().getSelectedItem().getContaObj();
+						DialogResponse i = Dialogs.showConfirmDialog(main.getPrimaryStage(), "Tem certeza de que deseja remover?");
+						if (i == DialogResponse.YES){
+							Cadastro.removeConta(conta);
+							tabelaContas.getSelectionModel().getSelectedItem().setContaObj(null);
+							atualizaTabelaContas();
+							atualizaSaldoPrevisto();
+							atualizaSaldoTotal();
+							tabelaHistorico.setItems(null);
+						}
+					}catch (NullPointerException e){
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma despesa e tente novamente!");
 					}
 				}
 			});
@@ -277,8 +298,6 @@ public class HomeController implements Initializable{
 							atualizaTabelaContas();
 							entraValor.setVisible(false);
 							atualizaSaldoTotal();
-						} catch (SQLException e) {
-							Dialogs.showErrorDialog(main.getPrimaryStage(), "Problema no banco de dados! \n \n" + e.getSQLState());
 						} catch (IllegalArgumentException e){
 							Dialogs.showErrorDialog(main.getPrimaryStage(), e.getMessage());
 						} catch (NullPointerException e){
@@ -317,18 +336,71 @@ public class HomeController implements Initializable{
 			btRemoveDespesa.setOnAction(new EventHandler<ActionEvent>(){
 				@Override
 				public void handle(ActionEvent arg0) {
-					DialogResponse i = Dialogs.showConfirmDialog(main.getPrimaryStage(), "Tem certeza de que deseja remover?");
-					if (i == DialogResponse.YES){
-						Cadastro.removeDespesa(
-								tabelaDespesas.getSelectionModel().getSelectedItem().getDespesa1()
-						);
-						tabelaDespesas.getSelectionModel().getSelectedItem().setDespesa1(null);
-						atualizaSaldoTotal();
-						atualizaTabelaDespesas();
-						atualizaDebitoTotal();
-						atualizaSaldoPrevisto();
+					try{
+						Despesa desp = tabelaDespesas.getSelectionModel().getSelectedItem().getDespesa1();
+						DialogResponse i = Dialogs.showConfirmDialog(main.getPrimaryStage(), "Tem certeza de que deseja remover?");
+						if (i == DialogResponse.YES){
+							Cadastro.removeDespesa(desp);
+							tabelaDespesas.getSelectionModel().getSelectedItem().setDespesa1(null);
+							atualizaSaldoTotal();
+							atualizaTabelaDespesas();
+							atualizaDebitoTotal();
+							atualizaSaldoPrevisto();
+						}
+					}catch (NullPointerException e){
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma despesa e tente novamente!");
 					}
 				}
+			});
+			//Editar conta
+			editaDespesa.setOnAction(new EventHandler<ActionEvent>(){
+				@Override
+				public void handle (ActionEvent evt){
+					try {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CadastroDespesa.fxml"));
+						AnchorPane novaDespesa = (AnchorPane) loader.load();
+						CadastroDespesaController controller = loader.getController();
+						controller.setMain(main);
+						Despesa editar = tabelaDespesas.getSelectionModel().getSelectedItem().getDespesa1();
+						controller.editaDespesa(editar);
+						novaJanelaDespesas = new Stage();
+						Scene cena = new Scene(novaDespesa);
+						novaJanelaDespesas.setTitle("Nova Despesa");
+						novaJanelaDespesas.initModality(Modality.WINDOW_MODAL);
+						novaJanelaDespesas.initOwner(main.getPrimaryStage());
+						novaJanelaDespesas.setScene(cena);
+						novaJanelaDespesas.show();
+					} catch (IOException e) {
+						Dialogs.showErrorDialog(null, "Não foi possível editar esta Despesa! \n \n" + e.getMessage());
+					} catch (NullPointerException e){
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma despesa e tente novamente!");
+					}
+				}
+			});
+			btPagar.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					try {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Pagto.fxml"));
+						AnchorPane novoPagto = (AnchorPane) loader.load();
+						PagtoController controller = loader.getController();
+						controller.setMain(main);
+						Despesa despesa = tabelaDespesas.getSelectionModel().getSelectedItem().getDespesa1();
+						controller.setDespesa(despesa);
+						novaJanelaPagto = new Stage();
+						Scene cena = new Scene(novoPagto);
+						novaJanelaPagto.setTitle("Novo Pagamento");
+						novaJanelaPagto.initModality(Modality.WINDOW_MODAL);
+						novaJanelaPagto.initOwner(main.getPrimaryStage());
+						novaJanelaPagto.setScene(cena);
+						novaJanelaPagto.show();
+					} catch (IOException e) {
+						Dialogs.showErrorDialog(null, "Não foi possível editar esta Despesa! \n \n" + e.getMessage());
+					} catch (NullPointerException e){
+						Dialogs.showErrorDialog(main.getPrimaryStage(), "Selecione uma despesa e tente novamente!");
+					}
+				}
+				
 			});
 	}
 	/*
@@ -391,13 +463,38 @@ public class HomeController implements Initializable{
 	public void atualizaSaldoPrevisto (){
 		saldoPrevisto.setText(Calcula.saldoPrevisto());
 	}
+	public void atualizaInicio () {
+		ObservableList<String> lista1 = FXCollections.observableArrayList();
+		ObservableList<String> lista2 = FXCollections.observableArrayList();
+		ObservableList<String> lista3 = FXCollections.observableArrayList();
+		ObservableList<String> lista4 = FXCollections.observableArrayList();
+		
+		for (DespesaModel despesa: listaDespesas){
+			Despesa desp = despesa.getDespesa1();
+			if (desp.getStatus().equals("Falta pagar")){
+				if (desp.getPrioridade().equals("Importante / Urgente")){
+					lista1.add(desp.toString());
+				}else if (desp.getPrioridade().equals("Importante / Não urgente")) {
+					lista2.add(desp.toString());
+				}else if (desp.getPrioridade().equals("Não importante / Urgente")) {
+					lista3.add(desp.toString());
+				}else if (desp.getPrioridade().equals("Não importante / Não urgente")){
+					lista4.add(desp.toString());
+				}
+			}
+		}
+		l1.setItems(lista1);
+		l2.setItems(lista2);
+		l3.setItems(lista3);
+		l4.setItems(lista4);
+	}
 	/*************************************
 	 * Cadastro de Despesas - INICIO
 	 *************************************/
 	public void atualizaTabelaDespesas(){
 		try {
 			ArrayList<Despesa> despesas = new DadosDespesa().getDespesas();
-			ObservableList<DespesaModel> listaDespesas = FXCollections.observableArrayList();
+			listaDespesas = FXCollections.observableArrayList();
 			for (Despesa despesa:despesas){
 				if (despesa.getPessoa().getId() == main.getUser().getId()){
 					listaDespesas.add(new DespesaModel(despesa));
@@ -414,6 +511,16 @@ public class HomeController implements Initializable{
 
 	}
 	
+	public void atualizaTudo (){
+		// Atualiza painel superior
+		atualizaSaldoTotal();
+		atualizaDebitoTotal();
+		atualizaSaldoPrevisto();
+		atualizaTabelaDespesas();
+		atualizaTabelaContas();
+		atualizaInicio();
+	}
+	
 	public Main getMain() {
 		return main;
 	}
@@ -428,5 +535,11 @@ public class HomeController implements Initializable{
 	}
 	public void setNovaJanelaDespesas(Stage novaJanelaDespesas) {
 		this.novaJanelaDespesas = novaJanelaDespesas;
+	}
+	public Stage getNovaJanelaPagto() {
+		return novaJanelaPagto;
+	}
+	public void setNovaJanelaPagto(Stage novaJanelaPagto) {
+		this.novaJanelaPagto = novaJanelaPagto;
 	}
 }

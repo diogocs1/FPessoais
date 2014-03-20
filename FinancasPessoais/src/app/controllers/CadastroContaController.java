@@ -30,6 +30,8 @@ public class CadastroContaController implements Initializable{
 	@FXML
 	private ChoiceBox<String> tipo;
 	@FXML
+	private TextField agencia;
+	@FXML
 	private TextField numero;
 	@FXML
 	private TextField saldo;
@@ -58,13 +60,14 @@ public class CadastroContaController implements Initializable{
 		btSalvar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent evt) {
+				String conta = agencia.getText() +" - " +numero.getText();
 				try {
 					if (edita){
 						Cadastro.editaConta(
 								editaConta, 
 								main.getUser(), 
 								banco.getValue(), 
-								numero.getText(), 
+								conta, 
 								tipo.getValue(), 
 								Normaliza.normalizaValor(saldo.getText())
 								);
@@ -72,14 +75,12 @@ public class CadastroContaController implements Initializable{
 						Cadastro.cadastraConta(
 								main.getUser(), 
 								banco.getValue(), 
-								numero.getText(), 
+								conta, 
 								tipo.getValue(), 
 								Normaliza.normalizaValor(saldo.getText())
 								);
 					}
-					main.getControllerHome().atualizaTabelaContas();
-					main.getControllerHome().atualizaSaldoTotal();
-					main.getControllerHome().atualizaSaldoPrevisto();
+					main.getControllerHome().atualizaTudo();
 					main.getControllerHome().getNovaJanelaConta().close();
 				} catch (Exception e) {
 					Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());

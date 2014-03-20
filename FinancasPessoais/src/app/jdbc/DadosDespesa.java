@@ -51,4 +51,17 @@ public class DadosDespesa extends BD {
 		stmt.execute();
 		stmt.close();
 	}
+
+	public void editaDespesa(Despesa editaDesp, Despesa novaDespesa) throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement("UPDATE gastos SET descricao = ?, vencimento = ?, prioridade = ?, valor = ?, status = ? WHERE idgastos = ?");
+		stmt.setString(1, novaDespesa.getDescricao());
+		stmt.setString(2, novaDespesa.getVencimento());
+		stmt.setString(3, novaDespesa.getPrioridade());
+		stmt.setDouble(4, novaDespesa.getValor());
+		stmt.setString(5, novaDespesa.getStatus());
+		stmt.setInt(6, editaDesp.getId());
+		
+		stmt.execute();
+		stmt.close();
+	}
 }

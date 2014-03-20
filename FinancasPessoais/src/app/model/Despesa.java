@@ -1,5 +1,8 @@
 package app.model;
 
+import javafx.scene.control.Dialogs;
+import app.logica.Verifica;
+
 public class Despesa {
 	private int id;
 	private Usuario pessoa;
@@ -47,24 +50,13 @@ public class Despesa {
 		return vencimento;
 	}
 
-	public void setVencimento(String vencimento) throws IllegalArgumentException{
-		String[] formataVencimento = vencimento.split("/");
-		int[] data = new int[3];
-		for (int i = 0; i < formataVencimento.length; i++){
-			data[i] = Integer.parseInt(formataVencimento[i]);
-		}
-		if (data[0] <= 31 && data[1] <= 12 && data[2] > 2000){
-			if (data[1] == 2 && data[0] > 29){
-				throw new IllegalArgumentException("Data Inválida");
-			}else if (data[0] <= 30 && (data[1] % 2 == 0 && data[1] < 7 || data[1] % 2 != 0 && data[1] > 8) ){
+	public void setVencimento(String vencimento){
+		try{
+			if (Verifica.validaData(vencimento)){
 				this.vencimento = vencimento;
-			}else if (data[0] <= 31 && ! (data[1] % 2 == 0 && data[1] < 7 || data[1] % 2 != 0 && data[1] > 8) ){
-				this.vencimento = vencimento;
-			}else{
-				throw new IllegalArgumentException("Data Inválida");
 			}
-		}else{
-			throw new IllegalArgumentException("Data Inválida!");
+		}catch (IllegalArgumentException e){
+			Dialogs.showErrorDialog(null, "Data inválida!");
 		}
 	}
 
@@ -102,5 +94,9 @@ public class Despesa {
 
 	public void setPessoa(Usuario pessoa) {
 		this.pessoa = pessoa;
+	}
+	@Override
+	public String toString() {
+		return vencimento + " : "+ descricao;
 	}
 }

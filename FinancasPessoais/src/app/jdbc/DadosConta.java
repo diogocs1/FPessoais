@@ -83,12 +83,6 @@ public class DadosConta extends BD{
 		stmt.setInt(5, antigaConta.getId());
 		
 		stmt.execute();
-//		// Adiciona a última ação ao histórico
-//		int posHist = novaConta.getHistorico().size() - 1;
-//		addHistorico(
-//				novaConta.getHistorico().get(posHist),
-//				novaConta
-//				);
 		stmt.close();
 	}
 	public void removeConta (Conta conta) throws SQLException {

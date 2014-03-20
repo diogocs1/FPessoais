@@ -5,10 +5,12 @@ import java.util.Date;
 
 import app.jdbc.DadosConta;
 import app.jdbc.DadosDespesa;
+import app.jdbc.DadosPagamento;
 import app.jdbc.DadosUsuario;
 import app.model.Acao;
 import app.model.Conta;
 import app.model.Despesa;
+import app.model.Pagamento;
 import app.model.Usuario;
 import javafx.scene.control.Dialogs;
 
@@ -77,10 +79,14 @@ public class Cadastro {
 		contaAtual.addAcao(new Acao(new Date(), "Valor depositado: "+valor));
 		new DadosConta().editaConta(contaAtual, contaAtual);
 	}
-	public static void sacaValor (Conta contaAtual, double valor) throws SQLException, NullPointerException {
+	public static void sacaValor (Conta contaAtual, double valor) {
 		contaAtual.sacar(valor);
 		contaAtual.addAcao(new Acao(new Date(), "Valor sacado: "+valor));
-		new DadosConta().editaConta(contaAtual, contaAtual);
+		try {
+			new DadosConta().editaConta(contaAtual, contaAtual);
+		} catch (SQLException | NullPointerException e) {
+			Dialogs.showErrorDialog(null, "Não é possível sacar! \n \n" + e.getMessage());
+		}
 	}
 	public static boolean cadastraDespesa (Usuario usuario, String descricao, String vencimento, String prioridade,String status, double valor ){
 		if (Verifica.campoVazio(descricao) && Verifica.campoVazio(vencimento) && Verifica.campoVazio(prioridade) && Verifica.campoVazio(valor) && Verifica.campoVazio(status)){
@@ -102,6 +108,40 @@ public class Cadastro {
 			Dialogs.showInformationDialog(null, "Despesa Removida!");
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Problema no banco de dados! \n \n" + e.getMessage());
-		} 
+		}
+	}
+	public static boolean editaDespesa(Despesa editaDesp, Usuario user,
+			String descricao, String vencimento, String prioridade, String status,
+			Double valor) {
+		if (Verifica.campoVazio(descricao) && Verifica.campoVazio(vencimento)&& Verifica.campoVazio(prioridade) && Verifica.campoVazio(status)){
+			Despesa novaDespesa = new Despesa(user, descricao, vencimento, prioridade, status, valor);
+			try{
+				new DadosDespesa().editaDespesa(editaDesp, novaDespesa);
+				return true;
+			}catch (SQLException e){
+				Dialogs.showWarningDialog(null, "Problema no banco de dados.\n \n" + e.getMessage());
+			}
+		}else{
+			Dialogs.showWarningDialog(null, "Preencha todos os campos!");
+		}
+		
+		return false;
+	}
+	public static void cadastraPagamento(Conta conta,Despesa despesa, double valor, String data) {
+		if (Verifica.campoVazio(data)){
+			if (valor == 0){
+				valor = despesa.getValor();
+			}
+			try{
+				Pagamento pgto = new Pagamento(despesa, valor, data);
+				System.out.println(despesa.getId());
+				new DadosPagamento().criaPagamento(pgto);
+				Dialogs.showInformationDialog(null, "Pagamento Efetuado!");
+			}catch (IllegalArgumentException e){
+				Dialogs.showErrorDialog(null, "Não foi possível realizar o pagamento, verifique todos so campos");
+			}catch (SQLException e){
+				Dialogs.showErrorDialog(null, "Não foi possível salvar! Aqui \n \n" + e.getSQLState());
+			}
+		}
 	}
 }

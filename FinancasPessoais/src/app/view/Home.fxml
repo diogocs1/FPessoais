@@ -41,10 +41,10 @@
               <children>
                 <Line endX="250.0" startX="-250.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="280.0" />
                 <Line endX="100.0" endY="440.0" startX="100.0" startY="-50.0" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="10.5" />
-                <ListView prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="60.0" />
-                <ListView prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="60.0" />
-                <ListView prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="300.0" />
-                <ListView prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="300.0" />
+                <ListView fx:id="l1" prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="60.0" />
+                <ListView fx:id="l3" prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="60.0" />
+                <ListView fx:id="l2" prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="300.0" />
+                <ListView fx:id="l4" prefHeight="201.0" prefWidth="220.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="300.0" />
                 <Text fill="RED" fontSmoothingType="LCD" stroke="WHITE" strokeLineCap="SQUARE" strokeType="OUTSIDE" strokeWidth="3.1" text="Importante" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="10.0">
                   <effect>
                     <Lighting specularConstant="0.8039370078740158">
@@ -404,11 +404,12 @@
                     <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Valor (R$)" fx:id="colunaValor" />
                   </columns>
                 </TableView>
-                <ToolBar orientation="VERTICAL" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="360.0">
+                <ToolBar orientation="VERTICAL" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="320.0">
                   <items>
                     <Button fx:id="btNovaDespesa" mnemonicParsing="false" text="Nova Despeza" />
+                    <Button fx:id="editaDespesa" mnemonicParsing="false" text="Editar Despesa" />
                     <Button fx:id="btRemoveDespesa" mnemonicParsing="false" style="" styleClass="botao-remover" text="Remover" />
-                    <Button fx:id="btPagar" mnemonicParsing="false" text="Pagar" />
+                    <Button fx:id="btPagar" mnemonicParsing="false" style="-fx-background-color: blue" text="Pagar" />
                   </items>
                 </ToolBar>
               </children>

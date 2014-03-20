@@ -7,6 +7,7 @@ import app.Main;
 import app.logica.Cadastro;
 import app.logica.Normaliza;
 import app.logica.Verifica;
+import app.model.Despesa;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -36,6 +38,9 @@ public class CadastroDespesaController implements Initializable{
 	private Button btSalvar;
 	@FXML
 	private Button btCancelar;
+	//Editar
+	private Despesa editaDesp;
+	private boolean edita;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,21 +52,35 @@ public class CadastroDespesaController implements Initializable{
 		btSalvar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
+				boolean cadastro = false;
 				if (Verifica.verificaNascimento(vencimento.getText())){
-					boolean cadastro = Cadastro.cadastraDespesa(
-							main.getUser(), 
-							descricao.getText(), 
-							vencimento.getText(),
-							prioridade.getValue(),
-							status.getValue(),
-							Normaliza.normalizaValor(valor.getText())
-							);
-					if (cadastro){
-						main.getControllerHome().atualizaTabelaDespesas();
-						main.getControllerHome().atualizaDebitoTotal();
-						main.getControllerHome().atualizaSaldoPrevisto();
-						main.getControllerHome().getNovaJanelaDespesas().close();
-					}
+					try{
+						if (edita){
+							cadastro = Cadastro.editaDespesa(
+									editaDesp,
+									main.getUser(), 
+									descricao.getText(), 
+									vencimento.getText(),
+									prioridade.getValue(),
+									status.getValue(),
+									Normaliza.normalizaValor(valor.getText())
+									);
+						}else{
+							cadastro = Cadastro.cadastraDespesa(
+									main.getUser(), 
+									descricao.getText(), 
+									vencimento.getText(),
+									prioridade.getValue(),
+									status.getValue(),
+									Normaliza.normalizaValor(valor.getText())
+									);
+						}
+						if (cadastro){
+							main.getControllerHome().atualizaTudo();
+							main.getControllerHome().getNovaJanelaDespesas().close();
+						}
+					}catch (Exception e){
+						Dialogs.showErrorDialog(null,"Erro ao Salvar! \n \n"+ e.getMessage());					}
 				}
 			}
 		});
@@ -79,6 +98,38 @@ public class CadastroDespesaController implements Initializable{
 	}
 	public void setMain(Main main) {
 		this.main = main;
+	}
+
+
+	public void editaDespesa(Despesa editar) {
+		setEditaDesp(editar);
+		this.descricao.setText(editar.getDescricao());
+		this.vencimento.setText(editar.getVencimento());
+		this.prioridade.setValue(editar.getPrioridade());
+		this.valor.setText(String.valueOf(editar.getValor()));
+		this.status.setValue(editar.getStatus());;
+		setEdita(true);
+		
+	}
+
+
+	public Despesa getEditaDesp() {
+		return editaDesp;
+	}
+
+
+	public void setEditaDesp(Despesa editaDesp) {
+		this.editaDesp = editaDesp;
+	}
+
+
+	public boolean isEdita() {
+		return edita;
+	}
+
+
+	public void setEdita(boolean edita) {
+		this.edita = edita;
 	}
 
 }

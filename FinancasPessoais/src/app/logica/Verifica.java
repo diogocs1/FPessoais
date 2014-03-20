@@ -90,4 +90,24 @@ public class Verifica {
 		}
 		return verifi;
 	}
+	public static boolean validaData (String sdata) throws IllegalArgumentException{
+		String[] formataVencimento = sdata.split("/");
+		int[] data = new int[3];
+		for (int i = 0; i < formataVencimento.length; i++){
+			data[i] = Integer.parseInt(formataVencimento[i]);
+		}
+		if (data[0] <= 31 && data[1] <= 12 && data[2] > 1900){
+			if (data[1] == 2 && data[0] > 29){
+				throw new IllegalArgumentException("Data Inválida");
+			}else if (data[0] <= 30 && (data[1] % 2 == 0 && data[1] < 7 || data[1] % 2 != 0 && data[1] > 8) ){
+				return true;
+			}else if (data[0] <= 31 && ! (data[1] % 2 == 0 && data[1] < 7 || data[1] % 2 != 0 && data[1] > 8) ){
+				return true;
+			}else{
+				throw new IllegalArgumentException("Data Inválida");
+			}
+		}else{
+			throw new IllegalArgumentException("Data Inválida!");
+		}
+	}
 }

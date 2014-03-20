@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="300.0" styleClass="background-window" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="app.controllers.PagtoController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Text fill="WHITE" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagar Despesa" AnchorPane.leftAnchor="25.0">
+      <effect>
+        <Lighting diffuseConstant="2.0" surfaceScale="1.893700787401575">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Point color="#009987" x="100.0" y="100.0" z="50.0" />
+          </light>
+        </Lighting>
+      </effect>
+      <font>
+        <Font name="System Bold Italic" size="30.0" />
+      </font>
+    </Text>
+    <VBox id="VBox" alignment="CENTER" layoutY="62.0" prefWidth="252.216796875" spacing="5.0" AnchorPane.leftAnchor="27.0">
+      <children>
+        <Label styleClass="texto-preto" text="Selecione uma conta" />
+        <ChoiceBox fx:id="conta" prefWidth="212.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ChoiceBox>
+        <Label prefHeight="19.0" prefWidth="197.0" styleClass="texto-preto" text="Caso não seja o valor total," />
+        <Label styleClass="texto-preto" text="Digite o valor" />
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Label styleClass="texto-preto" text="R$" />
+            <TextField fx:id="valor" prefWidth="100.0">
+              <HBox.margin>
+                <Insets />
+              </HBox.margin>
+            </TextField>
+          </children>
+        </HBox>
+        <Label styleClass="texto-preto" text="Digite a data de pagamento" />
+        <TextField fx:id="data" prefWidth="100.0" promptText="dd/mm/aaa">
+          <VBox.margin>
+            <Insets left="80.0" right="80.0" />
+          </VBox.margin>
+        </TextField>
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Button fx:id="btSalvar" mnemonicParsing="false" text="Salvar" />
+            <Button fx:id="btCancelar" mnemonicParsing="false" text="Cancelar" />
+          </children>
+          <VBox.margin>
+            <Insets top="10.0" />
+          </VBox.margin>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+  <stylesheets>
+    <URL value="@style.css" />
+  </stylesheets>
+</AnchorPane>

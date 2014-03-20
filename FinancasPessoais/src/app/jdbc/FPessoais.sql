@@ -9,15 +9,15 @@ CREATE TABLE IF NOT EXISTS `conta` (
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `usuario` (`idusuario`));
 
-CREATE TABLE IF NOT EXISTS `ganhos` (
-  `idganhos` INTEGER PRIMARY KEY,
-  `titulo` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pagamento` (
+  `idpagamento` INTEGER PRIMARY KEY,
   `valor` DOUBLE NOT NULL,
-  `tipo` VARCHAR(45) NOT NULL,
-  `usuario_idusuario` INT(11) NOT NULL,
-  CONSTRAINT `fk_ganhos_usuario`
-    FOREIGN KEY (`usuario_idusuario`)
-    REFERENCES `usuario` (`usuario_idusuario`));
+  `data` VARCHAR(45) NOT NULL,
+  `conta_idconta` INT(11) NOT NULL,
+  `gastos_idgastos` INT(11) NOT NULL,
+  CONSTRAINT `fk_pagamentos_gastos`
+    FOREIGN KEY (`gastos_idgastos`)
+    REFERENCES `gastos` (`idgastos`));
 
 CREATE TABLE IF NOT EXISTS `gastos` (
   `idgastos` INTEGER PRIMARY KEY,
@@ -85,6 +85,7 @@ INSERT INTO `bancos` (idbanco, nome) VALUES (
 (021 ,	'BANESTES S.A. Banco do Estado do Espírito Santo'),
 (104 ,	'Caixa Econômica Federal'),
 (399 ,	'HSBC Bank Brasil S.A. - Banco Múltiplo'),
-(409 ,	'UNIBANCO - União de Bancos Brasileiros S.A'
-);
+(409 ,	'UNIBANCO - União de Bancos Brasileiros S.A'),
+(0, 'Outro'),
+(-1, 'Outros Valores');
 

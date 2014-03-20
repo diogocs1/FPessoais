@@ -12,7 +12,7 @@ public class DespesaModel {
 	
 	public DespesaModel(Despesa despesa) {
 		setDespesa1(despesa);
-		descricao = new SimpleStringProperty(despesa.getDescricao());
+		descricao = new SimpleStringProperty(despesa.getDescricao() +" " +despesa.getStatus());
 		vencimento = new SimpleStringProperty(despesa.getVencimento());
 		valor = new SimpleDoubleProperty(despesa.getValor());
 	}

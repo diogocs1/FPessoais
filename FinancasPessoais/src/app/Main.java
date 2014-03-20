@@ -106,6 +106,7 @@ public class Main extends Application {
 				//Coloca os itens na tabela
 				controllerHome.atualizaTabelaDespesas();
 				controllerHome.atualizaTabelaContas();
+				controllerHome.atualizaInicio();
 			}
 			root.setCenter(home);
 		}catch (Exception e){
