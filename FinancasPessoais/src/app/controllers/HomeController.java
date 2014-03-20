@@ -455,10 +455,10 @@ public class HomeController implements Initializable{
 	 * Cadastro de contas - FIM
 	 *************************************/
 	public void atualizaSaldoTotal (){
-		saldoTotal.setText(Calcula.somaSaldo());
+		saldoTotal.setText(Calcula.somaSaldo(main));
 	}
 	public void atualizaDebitoTotal (){
-		debitoTotal.setText(Calcula.somaDespesas());
+		debitoTotal.setText(Calcula.somaDespesas(main));
 	}
 	public void atualizaSaldoPrevisto (){
 		saldoPrevisto.setText(Calcula.saldoPrevisto());
