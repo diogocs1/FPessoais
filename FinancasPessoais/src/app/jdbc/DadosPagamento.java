@@ -3,9 +3,7 @@ package app.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import app.model.Despesa;
 import app.model.Pagamento;
-import app.model.Usuario;
 
 public class DadosPagamento extends BD{
 	public void criaPagamento (Pagamento pagamento) throws SQLException{
