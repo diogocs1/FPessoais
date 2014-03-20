@@ -53,7 +53,7 @@ public class CadastroContaController implements Initializable{
 		} catch (SQLException e) {
 			Dialogs.showErrorDialog(null, "Erro no Banco de dados \n \n" + e.getMessage());
 		}
-		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Conta Fácil","Conta Salário"));
+		tipo.setItems(FXCollections.observableArrayList("Conta Corrente","Conta Poupança", "Outro", "Outros valores"));
 		// FIM
 
 		// Ações dos botões

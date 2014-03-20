@@ -45,7 +45,7 @@ public class HomeController implements Initializable{
 	//Instância Principal
 	private Main main;
 	
-	/*************************************
+	/*-************************************
 	 * Cadastro de contas
 	 *************************************/
 		// Painel superior direito:
@@ -102,7 +102,7 @@ public class HomeController implements Initializable{
 		@FXML
 		private TextField tfValor;
 		
-		/*************************************************
+		/*-************************************************
 		 * Tela de despesas
 		 *************************************************/
 		private ObservableList<DespesaModel> listaDespesas;
@@ -127,7 +127,7 @@ public class HomeController implements Initializable{
 		@FXML
 		private Button editaDespesa;
 		
-		/*************************************************
+		/*-************************************************
 		 * Tela Início
 		 *************************************************/
 		@FXML
@@ -172,7 +172,7 @@ public class HomeController implements Initializable{
 		atualizaSaldoTotal();
 		atualizaDebitoTotal();
 		atualizaSaldoPrevisto();
-		/*************************************
+		/*-************************************
 		 * Cadastro de contas
 		 *************************************/
 		//Torna o campo valor invisível
@@ -307,10 +307,10 @@ public class HomeController implements Initializable{
 					}
 				}
 			});
-			/*************************************
+			/*-************************************
 			 * Cadastro de contas - FIM
 			 *************************************/
-			/*************************************
+			/*-************************************
 			 * Cadastro de despesas - INICIO
 			 *************************************/
 			btNovaDespesa.setOnAction(new EventHandler<ActionEvent>(){
@@ -406,7 +406,7 @@ public class HomeController implements Initializable{
 	/*
 	 * Initialize - FIM
 	 */
-	/*************************************
+	/*-************************************
 	 * Cadastro de contas
 	 *  - Métodos de tabelas
 	 *************************************/
@@ -451,7 +451,7 @@ public class HomeController implements Initializable{
 		}
 		
 	}
-	/*************************************
+	/*-************************************
 	 * Cadastro de contas - FIM
 	 *************************************/
 	public void atualizaSaldoTotal (){
@@ -463,6 +463,13 @@ public class HomeController implements Initializable{
 	public void atualizaSaldoPrevisto (){
 		saldoPrevisto.setText(Calcula.saldoPrevisto());
 	}
+	
+	/*-************************************
+	 * Tela Inicial
+	 *************************************/
+	/*
+	 * Atualiza Lista da Tela Início
+	 */
 	public void atualizaInicio () {
 		ObservableList<String> lista1 = FXCollections.observableArrayList();
 		ObservableList<String> lista2 = FXCollections.observableArrayList();
@@ -488,7 +495,10 @@ public class HomeController implements Initializable{
 		l3.setItems(lista3);
 		l4.setItems(lista4);
 	}
-	/*************************************
+	/*-***********************************
+	 * Tela Inicial - FIM
+	 *************************************/
+	/*-************************************
 	 * Cadastro de Despesas - INICIO
 	 *************************************/
 	public void atualizaTabelaDespesas(){

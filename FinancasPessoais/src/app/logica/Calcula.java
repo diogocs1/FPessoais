@@ -31,6 +31,7 @@ public class Calcula {
 		try{
 			ArrayList<Despesa> despesas = new DadosDespesa().getDespesas();
 			for (Despesa despesa: despesas){
+				if (despesa.getStatus().equals("Falta pagar"))
 				debitoTotal += despesa.getValor();
 			}
 		}catch (SQLException e){
