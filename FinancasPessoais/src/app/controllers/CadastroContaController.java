@@ -60,7 +60,12 @@ public class CadastroContaController implements Initializable{
 		btSalvar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle (ActionEvent evt) {
-				String conta = agencia.getText() +" - " +numero.getText();
+				String conta;
+				if (banco.getValue().equals("Outros valores")){
+					conta = "0";
+				}else{
+					conta = agencia.getText() +" - " +numero.getText();
+				}
 				try {
 					if (edita){
 						Cadastro.editaConta(
